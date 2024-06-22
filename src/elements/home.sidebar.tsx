@@ -99,20 +99,20 @@ export default function HomeSideBar(props: IHomeSideBarProps) {
           activeIconL={<FaMoneyBillAlt size={20} />}
           childs={[
             {
-              title: "Child",
+              title: "Lương năm",
               iconL: <AiOutlineMail className="icon" size={18} />,
-              link: "home",
+              link: "/wage/year",
             },
-            {
-              title: "Child",
-              iconL: <AiOutlineMail className="icon" size={18} />,
-              link: "home1",
-            },
-            {
-              title: "Child",
-              iconL: <AiOutlineMail className="icon" size={18} />,
-              link: "home2",
-            },
+            // {
+            //   title: "",
+            //   iconL: <AiOutlineMail className="icon" size={18} />,
+            //   link: "home1",
+            // },
+            // {
+            //   title: "Child",
+            //   iconL: <AiOutlineMail className="icon" size={18} />,
+            //   link: "home2",
+            // },
           ]}
         />
         <HomeSidebarItem

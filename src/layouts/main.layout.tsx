@@ -1,3 +1,4 @@
+import { calc } from "antd/es/theme/internal";
 import * as React from "react";
 import HomeHeader from "src/elements/home.header";
 import HomeSideBar from "src/elements/home.sidebar";
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background-color: #8f8f8f;
+  background-color: #aaa;
   height: 100vh;
 `;
 
@@ -19,7 +20,10 @@ export default function MainLayout(props: IMainLayoutProps) {
   return (
     <Wrapper>
       <HomeHeader />
-      <div className="flex flex-1 gap-2 px-1 pb-1">
+      <div
+        className="flex flex-1 gap-2 px-1 pb-1"
+        style={{ height: "calc(100% - 100px)" }}
+      >
         <HomeSideBar />
         {props.children}
       </div>

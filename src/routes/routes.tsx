@@ -13,6 +13,7 @@ import Profile1 from "src/pages/profile/profile.page";
 import Profile from "src/pages/profile/profile.page";
 import Profile2 from "src/pages/profile/profile.page2";
 import WagePage from "src/pages/wage/wage";
+import WageYear from "src/pages/wage/wage-year";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,18 @@ export const router = createBrowserRouter([
       {
         path: "/home/home2",
         element: <Home2 />,
+      },
+      {
+        path: "/wage/main",
+        element: <WagePage />,
+      },
+      {
+        path: "/wage/year",
+        element: <WageYear />,
+      },
+      {
+        path: "/job/main",
+        element: <Profile />,
       },
       {
         path: "/profile/main",
