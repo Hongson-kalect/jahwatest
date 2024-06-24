@@ -11,8 +11,8 @@ export interface IMainLayoutProps {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  background-color: #aaa;
+  gap: 4px;
+  background-color: #dfdfdf;
   height: 100vh;
 `;
 
@@ -21,7 +21,7 @@ export default function MainLayout(props: IMainLayoutProps) {
     <Wrapper>
       <HomeHeader />
       <div
-        className="flex flex-1 gap-2 px-1 pb-1"
+        className="flex flex-1 gap-1 pb-1"
         style={{ height: "calc(100% - 100px)" }}
       >
         <HomeSideBar />

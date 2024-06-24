@@ -137,7 +137,7 @@ export default function LoginPage(props: ILoginPageProps) {
           </div>
           <button
             className="bg-[#7747ff] m-auto px-6 py-2 rounded text-white text-lg w-full"
-            onClick={() => navigate("/home")}
+            onClick={() => navigate("/home/main")}
           >
             Đăng nhập
           </button>

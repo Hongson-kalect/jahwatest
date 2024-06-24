@@ -14,6 +14,7 @@ import {
 import summerLogo from "src/assets/image/summer.jfif";
 import { FaUserLarge } from "react-icons/fa6";
 import { IoIosNotifications, IoIosNotificationsOutline } from "react-icons/io";
+import { IoHomeOutline } from "react-icons/io5";
 
 export interface IHomeSideBarProps {}
 
@@ -22,15 +23,20 @@ type MenuItem = Required<MenuProps>["items"][number];
 const Wrapper = styled.div`
   padding: 4px;
   border-radius: 4px;
-  /* background-color: black; */
+  background-color: #46853e;
   width: 200px;
   overflow: auto;
-  background-color: #101010;
+  /* background-color: white; */
   display: flex;
   flex-direction: column;
   gap: 4px;
   &.focus-inside {
   }
+
+  box-shadow: -15px -15px 15px rgba(255, 255, 255, 0.2),
+    15px 15px 15px rgba(0, 0, 0, 0.1),
+    -5px -5px 5px rgba(255, 255, 255, 0.2) inset,
+    5px 5px 5px rgba(0, 0, 0, 0.1) inset;
 `;
 
 export default function HomeSideBar(props: IHomeSideBarProps) {
@@ -41,16 +47,16 @@ export default function HomeSideBar(props: IHomeSideBarProps) {
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
-      <div className="h-32 flex flex-col justify-center items-center -m-1">
+      <div className="h-32 flex flex-col justify-center items-center mb-4">
         <div
           className="w-full flex-1"
           style={{
             background: `url(${summerLogo}) center center / cover no-repeat`,
           }}
         ></div>
-        <p className="font-bold text-xl text-green-600 italic mb-2 w-full text-center">
+        {/* <p className="font-bold text-xl text-green-600 italic mb-2 w-full text-center">
           JAHWA Nương
-        </p>
+        </p> */}
       </div>
       <div
         className="flex-1 overflow-auto hidden-scroll"
@@ -59,8 +65,8 @@ export default function HomeSideBar(props: IHomeSideBarProps) {
         <HomeSidebarItem
           title="Home"
           link="/home/main"
-          iconL={<AiFillHome className="icon" size={20} />}
-          iconR={<FaAngleRight />}
+          iconL={<IoHomeOutline className="icon" size={20} />}
+          activeIconL={<AiFillHome className="icon" size={20} />}
           childs={[
             {
               title: "Home1",

@@ -12,6 +12,7 @@ import Profile from "./pages/profile/profile.page";
 import WagePage from "./pages/wage/wage";
 import NotificationPage from "./pages/notification/notify.page";
 import { router } from "./routes/routes";
+import "react-calendar/dist/Calendar.css";
 
 function App() {
   return (

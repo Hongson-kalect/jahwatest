@@ -21,7 +21,7 @@ export interface IHomeSidebarItemProps {
 }
 
 const Wrapper = styled.div`
-  /* background-color: gray; */
+  background-color: transparent;
   transition: all 0.3s;
   margin-bottom: 4px;
 `;
@@ -31,60 +31,70 @@ const MainMenu = styled.div`
   gap: 2px;
   align-items: center;
   justify-content: space-between;
-  background-color: #cce9d0cc;
   padding: 4px 8px;
   cursor: pointer;
   transition: 0.3s;
+  color: #ffffff;
   /* color: #333333; */
 
   &:hover {
-    background-color: #96ae95;
+    background-color: #a1a1a1;
   }
   &.active {
     /* border-radius: 4px; */
-    background-color: green;
-    color: white;
+    background-color: white;
+    color: black;
     font-weight: 600;
   }
 `;
 
 const ChildMenuList = styled.div`
-  background-color: #d9d9d9;
+  /* background-color: #272727; */
   padding-left: 4px;
   padding-right: 2px;
-  transition: all linear 0.3s;
-  /* height: 0; */
-  overflow: hidden;
-  /* animation: expand 0.3s forwards; */
+  color: white;
+  &.active {
+    background-color: #e9e9e9;
+    padding-left: 4px;
+    padding-right: 2px;
+    transition: all linear 0.3s;
+    overflow: hidden;
+  }
 `;
 
 const ChildMenu = styled.div`
   display: flex;
   gap: 8px;
-  padding: 2px 8px;
+  padding: 2px 0px 2px 8px;
   font-size: 13px;
   align-items: center;
-  border-left: 2px solid pink;
+
   cursor: pointer;
   transition: 0.3s;
-  color: #333;
+  color: #dbdbdb;
+  background-color: #57a74c;
   opacity: 0;
   /* transform: translateY(20px);
   transition: opacity 0.3s, transform 0.3s; */
   animation: slide-in 0.3s forwards;
 
   &:hover {
-    background-color: #e4ffdc;
+    background-color: #adadad;
   }
   &.active {
+    background-color: #cecece;
     /* border-radius: 4px; */
+    border-left: 2px solid gray;
+    color: #2e2e2e;
+  }
+  &.child-active {
     padding-left: 12px;
+    background-color: white;
+    color: black;
     font: 14px;
     font-weight: 600;
-    background-color: #235823;
 
-    border-left: 2px solid red;
-    color: white;
+    border-left: 2px solid white;
   }
 
   &:first-child {
@@ -140,7 +150,7 @@ export default function HomeSidebarItem(props: IHomeSidebarItemProps) {
           </div>
         ) : null}
       </MainMenu>
-      <ChildMenuList className={displayChild ? "scroll" : ""}>
+      <ChildMenuList className={`${isActive ? "active" : ""}`}>
         {props?.childs?.length &&
           displayChild &&
           props.childs.map((child, index) => {
@@ -150,7 +160,9 @@ export default function HomeSidebarItem(props: IHomeSidebarItemProps) {
             return (
               <ChildMenu
                 key={index}
-                className={`${isChildActive ? "active" : ""}`}
+                className={`${isChildActive ? "child-active" : ""} ${
+                  isActive ? "active" : ""
+                }`}
                 onClick={() => navigateLink(child.link)}
               >
                 {isChildActive ? child.activeIconL || child.iconL : child.iconL}

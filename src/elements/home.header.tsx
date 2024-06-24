@@ -11,6 +11,7 @@ import krFlag from "src/assets/image/kr-flag.png";
 import cnFlag from "src/assets/image/cn-flag.png";
 import enFlag from "src/assets/image/en-flag.png";
 import { MdOutlineNotificationsActive } from "react-icons/md";
+import { HeaderSearch } from "src/components/search/header.search";
 
 export interface IHomeHeaderProps {}
 
@@ -38,6 +39,7 @@ const Wrapper = styled.div`
   background-color: white;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const languages: DefaultOptionType[] = [
@@ -123,9 +125,8 @@ export default function HomeHeader(props: IHomeHeaderProps) {
           Jahwa vina
         </p>
       </div>
-      {/* <div className="flex-1 bg-gray-400 px-10">
-        Tiêu đề thông báo chạy quanh chỗ này
-      </div> */}
+      <HeaderSearch />
+
       <div className="options flex justify-center items-center gap-2">
         <div className="relative">
           <MdOutlineNotificationsActive size={24} color="brown" />
@@ -137,12 +138,6 @@ export default function HomeHeader(props: IHomeHeaderProps) {
           </p>
         </div>
         <div className="flex flex-col text-xs font-semibold w-24 ">
-          <div
-            className="text-gray-700 pl-2 overflow-ellipsis text-nowrap overflow-hidden"
-            style={{ fontSize: "10px", color: "blue" }}
-          >
-            Sản xuất
-          </div>
           <div className="text-gray-700 overflow-ellipsis text-nowrap overflow-hidden">
             Tạ Thị Tòm Tem
           </div>

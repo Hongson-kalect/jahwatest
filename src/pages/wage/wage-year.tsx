@@ -12,8 +12,20 @@ const Wrapper = styled.div`
   gap: 16px;
 `;
 
-const StyledTable = styled(Table)`
-  border: 2px solid #aaa;
+const StyledTable = styled.table`
+  width: 100%;
+  border: 2px solid #555;
+
+  tr {
+    border-top: 1px solid #ddd;
+    &:first-child td {
+      color: black !important;
+      background-color: #cecece;
+      font-size: 14px;
+      font-weight: 600;
+      border-bottom: 1px solid #555;
+    }
+  }
   /* border-radius */
   th {
     background: #b7d8d1 !important;
@@ -50,11 +62,19 @@ const StyledTable = styled(Table)`
       color: #32a532;
     }
   }
+
+  .ant-table-footer {
+    padding: 2px 8px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #2727b6;
+    border-top: 1px solid gray;
+  }
 `;
 
 const tableValue = [
   {
-    time: "2024-05",
+    time: "2024-06",
     type: "Công nhật",
     salary: "8019206",
     bonus: "0",
@@ -179,6 +199,21 @@ const tableColumn = [
 ];
 
 export default function WageYear(props: IWageYearProps) {
+  const [sumary, setSumary] = React.useState(() => {
+    // tableColumn.reduce((
+    const sumary = tableColumn.reduce((acc, cur) => {
+      const key = cur.dataIndex as keyof (typeof tableValue)[0];
+      const sum = tableValue.reduce(
+        (acc, cur) => acc + (Number(cur[key]) || 0),
+        0
+      );
+      return { ...acc, [key]: sum };
+    }, {} as (typeof tableValue)[0]);
+
+    return sumary;
+  });
+  const tableRef = React.useRef();
+  // tableRef.current.tableValue.push(sumary);
   return (
     <Wrapper>
       <div className="select bg-white px-4 py-2 rounded flex gap-4 items-center">
@@ -198,17 +233,61 @@ export default function WageYear(props: IWageYearProps) {
       </div>
       <div className="sumary flex-1 overflow-auto bg-white rounded px-4 py-2">
         <StyledTable
-          pagination={false}
-          dataSource={tableValue}
-          columns={tableColumn}
-          onRow={(record) => {
-            return {
-              onClick: () => {
-                console.log(record);
-              },
-            };
-          }}
-        />
+        // ref={tableRef}
+        // rowKey={"time"}
+        // pagination={false}
+        // dataSource={tableValue}
+        // columns={tableColumn}
+        // onRow={(record) => {
+        //   return {
+        //     onClick: () => {
+        //       console.log(record);
+        //     },
+        //   };
+        // }}
+        >
+          <tbody>
+            <tr>
+              <td>Lương tháng</td>
+              <td>Phân loại lương</td>
+              <td>Tổng tiền lương</td>
+              <td>Tổng tiền thưởng</td>
+              <td>Tiền chịu thuế</td>
+              <td>Tiền miễn thuế</td>
+              <td>Thuế thu nhập</td>
+              <td>Thuế thu nhập vùng</td>
+              <td>Tổng tiền khấu trừ</td>
+              <td>Chi trả thực tế</td>
+            </tr>
+            {tableValue.map((item) => (
+              <tr key={item.time}>
+                <td>{item.time}</td>
+                <td>{numberToCurrency(Number(item.salary))}</td>
+                <td>{numberToCurrency(Number(item.sumary))}</td>
+                <td>{numberToCurrency(Number(item.bonus))}</td>
+                <td>{numberToCurrency(Number(item.tax))}</td>
+                <td>{numberToCurrency(Number(item.unTax))}</td>
+                <td>{numberToCurrency(Number(item.incomeTax))}</td>
+                <td>{numberToCurrency(Number(item.areaTax))}</td>
+                <td>{numberToCurrency(Number(item.dedux))}</td>
+                <td>{numberToCurrency(Number(item.sumary))}</td>
+              </tr>
+            ))}
+
+            <tr>
+              <td>Tổng lương</td>
+              <td>Phân loại lương</td>
+              <td>Tổng tiền lương</td>
+              <td>Tổng tiền thưởng</td>
+              <td>Tiền chịu thuế</td>
+              <td>Tiền miễn thuế</td>
+              <td>Thuế thu nhập</td>
+              <td>Thuế thu nhập vùng</td>
+              <td>Tổng tiền khấu trừ</td>
+              <td>Chi trả thực tế</td>
+            </tr>
+          </tbody>
+        </StyledTable>
       </div>
       {/* <div className="detail"></div> */}
     </Wrapper>
