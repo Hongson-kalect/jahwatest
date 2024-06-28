@@ -21,11 +21,13 @@ export default function MainLayout(props: IMainLayoutProps) {
     <Wrapper>
       <HomeHeader />
       <div
-        className="flex flex-1 gap-1 pb-1"
+        className="flex flex-1 gap-1"
         style={{ height: "calc(100% - 100px)" }}
       >
         <HomeSideBar />
-        {props.children}
+        <div className="h-full flex-1 overflow-auto hide-scroll">
+          {props.children}
+        </div>
       </div>
     </Wrapper>
   );

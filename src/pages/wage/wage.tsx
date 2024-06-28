@@ -10,6 +10,7 @@ import { usePDF } from "react-to-pdf";
 import { Page } from "@react-pdf/renderer";
 import ReactPDF from "@react-pdf/renderer";
 import { BsDownload } from "react-icons/bs";
+import { useTranslation } from "react-i18next";
 
 export interface IWagePageProps {}
 const Wrapper = styled(Page)`
@@ -259,6 +260,7 @@ const minus = [
 ];
 
 export default function WagePage(props: IWagePageProps) {
+  const { t } = useTranslation();
   const [downloadShow, setDownloadShow] = React.useState(true);
   const { toPDF, targetRef } = usePDF({ filename: "jahwa-salary.pdf" });
   const [totalPay] = React.useState(
@@ -286,9 +288,9 @@ export default function WagePage(props: IWagePageProps) {
   };
   return (
     <>
-      <Wrapper size={"A4"} ref={targetRef}>
+      <Wrapper size={"A4"} ref={targetRef} style={{ width: "760px" }}>
         <p className="title flex gap-2 justify-center items-center">
-          2024-06 - Chi tiết phiếu lương{" "}
+          2024-06 - {t("wage.title")}
           {downloadShow && (
             <BsDownload className="cursor-pointer" onClick={handlePDF} />
           )}
@@ -297,23 +299,23 @@ export default function WagePage(props: IWagePageProps) {
           <InfoTable>
             <tbody>
               <tr>
-                <td>Mã số</td>
+                <td>{t("wage.code")}</td>
                 <td>V22202020</td>
               </tr>
               <tr>
-                <td>Họ tên</td>
+                <td>{t("wage.name")}</td>
                 <td>Phùng Quốc Hùng</td>
               </tr>
               <tr>
-                <td>Bộ phận</td>
+                <td>{t("wage.department")}</td>
                 <td>IOS SẢN XUẤT</td>
               </tr>
               <tr>
-                <td>Chức vụ</td>
+                <td>{t("wage.position")}</td>
                 <td>Staff</td>
               </tr>
               <tr>
-                <td>Ngày chi trả</td>
+                <td>{t("wage.date")}</td>
                 <td>20/11/2024</td>
               </tr>
             </tbody>
@@ -321,23 +323,23 @@ export default function WagePage(props: IWagePageProps) {
           <InfoTable>
             <tbody>
               <tr>
-                <td>Cấp bậc</td>
+                <td>{t("wage.wageRank")}</td>
                 <td>S1 06</td>
               </tr>
               <tr>
-                <td>Ngân hàng</td>
+                <td>{t("wage.bankName")}</td>
                 <td>Viettinbank</td>
               </tr>
               <tr>
-                <td>Số tài khoản</td>
+                <td>{t("wage.bankNumber")}</td>
                 <td>0987432123423</td>
               </tr>
               <tr>
-                <td>Số giờ làm việc</td>
+                <td>{t("wage.workHour")}</td>
                 <td>240</td>
               </tr>
               <tr>
-                <td>Số ngày làm việc</td>
+                <td>{t("wage.workDay")}</td>
                 <td>30</td>
               </tr>
             </tbody>
@@ -350,22 +352,30 @@ export default function WagePage(props: IWagePageProps) {
             rowKey={"payFor"}
             footer={() => (
               <div className="text-base font-semibold">
-                Tổng chi trả:{" "}
+                {t("wage.totalPay")}:{" "}
                 <span className="ml-2 text-blue-600">
                   {numberToCurrency(totalPay)}
                 </span>
               </div>
             )}
           >
-            <ColumnGroup title="Chi tiết chi trả">
+            <ColumnGroup title={t("wage.payDetail")}>
               <Column
-                title="Hạng mục chi trả"
+                title={t("wage.paySection")}
                 dataIndex="payFor"
                 key="payFor"
               />
-              <Column title="Số tiền" dataIndex="amount" key="amount" />
-              <Column title="Giờ" dataIndex="hour" key="hour" />
-              <Column title="Phút" dataIndex="munite" key="munite" />
+              <Column
+                title={t("wage.amount")}
+                dataIndex="amount"
+                key="amount"
+              />
+              <Column title={t("wage.hour")} dataIndex="hour" key="hour" />
+              <Column
+                title={t("wage.munite")}
+                dataIndex="munite"
+                key="munite"
+              />
             </ColumnGroup>
           </StyledTable>
           <StyledTable
@@ -374,20 +384,24 @@ export default function WagePage(props: IWagePageProps) {
             pagination={false}
             footer={() => (
               <div className="text-base font-semibold mt-auto">
-                Tổng khấu trừ:{" "}
+                {t("wage.totalDeduct")}:{" "}
                 <span className="ml-2 text-red-600">
                   {numberToCurrency(totalMinus)}
                 </span>
               </div>
             )}
           >
-            <ColumnGroup title="Chi tiết khấu trừ">
+            <ColumnGroup title={t("wage.deductDetail")}>
               <Column
-                title="Hạng mục khấu trừ"
+                title={t("wage.deductSection")}
                 dataIndex="payFor"
                 key="payFor"
               />
-              <Column title="Số tiền" dataIndex="amount" key="amount" />
+              <Column
+                title={t("wage.deducamount")}
+                dataIndex="amount"
+                key="amount"
+              />
               {/* <Column title="Giờ" dataIndex="hour" key="hour" />
             <Column title="Phút" dataIndex="munite" key="munite" /> */}
             </ColumnGroup>
@@ -402,17 +416,17 @@ export default function WagePage(props: IWagePageProps) {
               dataSource={[
                 {
                   key: 1,
-                  title: "Tổng tiền chi trả",
+                  title: t("wage.totalPayment"),
                   value: numberToCurrency(totalPay),
                 },
                 {
                   key: 1,
-                  title: "Tổng tiền khẩu trừ",
+                  title: t("wage.totalDeduction"),
                   value: numberToCurrency(totalMinus),
                 },
                 {
                   key: 1,
-                  title: "Tiền chi trả thực tế",
+                  title: t("wage.total"),
                   value: numberToCurrency(totalPay - totalMinus),
                 },
               ]}
@@ -427,12 +441,20 @@ export default function WagePage(props: IWagePageProps) {
                 { previos: 0, current: 5, xray: 0, used: 5, left: 1 },
               ]}
             >
-              <ColumnGroup title={<p>HIỆN TRẠNG PHÉP NĂM</p>}>
-                <Column title="Năm trước" dataIndex="previos" key="previos" />
-                <Column title="Năm nay" dataIndex="current" key="current" />
-                <Column title="X-RAY" dataIndex="xray" key="xray" />
-                <Column title="Sử dụng" dataIndex="used" key="used" />
-                <Column title="Còn lại" dataIndex="left" key="left" />
+              <ColumnGroup title={<p>{t("wage.dayOffStatus")}</p>}>
+                <Column
+                  title={t("wage.lastYear")}
+                  dataIndex="previos"
+                  key="previos"
+                />
+                <Column
+                  title={t("wage.thisYear")}
+                  dataIndex="current"
+                  key="current"
+                />
+                <Column title={t("wage.X-RAY")} dataIndex="xray" key="xray" />
+                <Column title={t("wage.used")} dataIndex="used" key="used" />
+                <Column title={t("wage.left")} dataIndex="left" key="left" />
               </ColumnGroup>
             </StyledTable>
           </div>

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  font-family: "Roboto";
+  /* font-family: "Roboto"; */
 }
 
 .hidden-scroll {
@@ -20,6 +20,16 @@
 
 .rotate-default {
   animation: rotate-default 0.3s linear forwards;
+}
+
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scroll {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 @keyframes rotate-r-90 {

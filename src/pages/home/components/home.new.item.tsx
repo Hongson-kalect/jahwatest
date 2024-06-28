@@ -7,7 +7,7 @@ export interface IHomeNewItemProps {}
 const Wrapper = styled(Row)`
   padding: 4px 8px;
   flex-wrap: nowrap;
-  gap: 12px;
+  /* gap: 12px; */
   cursor: pointer;
   transition: all 0.2s linear;
 
@@ -17,6 +17,7 @@ const Wrapper = styled(Row)`
 `;
 
 const Title = styled(Col)`
+  padding-left: 8px;
   font-size: 14px;
   font-weight: 600;
   color: gray;
@@ -35,13 +36,18 @@ export default function HomeNewItem(props: IHomeNewItemProps) {
         <Image
           className="rounded-lg"
           src="https://onealsoutdoor.com/wp-content/uploads/2023/01/landscape-design.jpg"
-          //   height={60}
+          height={56}
         />
       </Col>
-      <Title className="title" span={12}>
-        <p className="line-clamp-2">Tin vui cho bệnh nhân ung thư.</p>
+      <Title className="title" span={16}>
+        <p className="line-clamp-2 text-xs" style={{ lineHeight: "14px" }}>
+          Tin vui cho bệnh nhân ung thư.
+        </p>
 
-        <p className="absolute bottom-1 text-xs font-light line-clamp-1">
+        <p
+          className="absolute bottom-1 text-xs line-clamp-1"
+          style={{ fontSize: "10px" }}
+        >
           Theo báo lá cải hiệu thuốc ABC mjka;s ka;s
         </p>
       </Title>

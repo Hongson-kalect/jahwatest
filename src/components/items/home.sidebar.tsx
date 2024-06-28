@@ -1,176 +1,165 @@
-import * as React from "react";
-import { AiFillHome } from "react-icons/ai";
+import React from "react";
 import { FaAngleRight } from "react-icons/fa";
-import { useNavigate, useParams, useRoutes } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export interface IHomeSidebarItemProps {
-  iconL?: React.ReactNode;
-  activeIconL?: React.ReactNode;
-  iconR?: React.ReactNode;
-  childs?: {
-    iconL?: React.ReactNode;
-    activeIconL?: React.ReactNode;
-    iconR?: React.ReactNode;
-    title: React.ReactNode;
-    link: string;
+type ItemProps = {
+  icon?: React.ReactNode;
+  activeIcon?: React.ReactNode;
+  title?: string;
+  link?: string;
+  className?: string;
+  subMenu?: {
+    title?: string;
+    link?: string;
+    icon?: React.ReactNode;
+    activeIcon?: React.ReactNode;
   }[];
-  title: string;
-  link: string;
-  expand?: boolean;
-}
+};
 
-const Wrapper = styled.div`
-  background-color: transparent;
-  transition: all 0.3s;
-  margin-bottom: 4px;
+const ItemWrapper = styled.div`
+  * {
+    transition: all 0.2s linear;
+  }
+  & > div:nth-child(2) {
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    margin: 0 0 4px 8px;
+  }
+
+  &.active {
+    & > div:first-child {
+      padding-left: 16px;
+      color: white;
+      background-color: #0077ff;
+    }
+
+    & > div:nth-child(2) {
+      border-bottom-right-radius: 12px;
+      border-bottom-left-radius: 12px;
+      margin: 0 0 4px 8px;
+      background-color: #9879e2;
+      & > div {
+        color: white !important;
+        transition: all 0.3s linear;
+
+        &.active {
+          padding-left: 26px;
+          background-color: #7f60c6 !important;
+        }
+
+        &:hover {
+          background-color: #a792d7;
+        }
+      }
+    }
+  }
 `;
 
 const MainMenu = styled.div`
   display: flex;
-  gap: 2px;
   align-items: center;
-  justify-content: space-between;
-  padding: 4px 8px;
   cursor: pointer;
-  transition: 0.3s;
-  color: #ffffff;
-  /* color: #333333; */
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 8px;
+
+  font-weight: 500;
+  line-height: 16px;
+  font-size: 14px;
+  padding: 8px 4px 8px 8px;
+  color: #c8c8c8;
+  transition: all 0.3s linear;
 
   &:hover {
-    background-color: #a1a1a1;
-  }
-  &.active {
-    /* border-radius: 4px; */
-    background-color: white;
-    color: black;
-    font-weight: 600;
+    color: white;
+    background-color: #c7dbff67;
   }
 `;
 
-const ChildMenuList = styled.div`
-  /* background-color: #272727; */
-  padding-left: 4px;
-  padding-right: 2px;
-  color: white;
-  &.active {
-    background-color: #e9e9e9;
-    padding-left: 4px;
-    padding-right: 2px;
-    transition: all linear 0.3s;
-    overflow: hidden;
-  }
-`;
-
-const ChildMenu = styled.div`
+const SubMenuWrapper = styled.div`
   display: flex;
-  gap: 8px;
-  padding: 2px 0px 2px 8px;
-  font-size: 13px;
-  align-items: center;
+  flex-direction: column;
+  /* gap: 2px; */
+`;
 
+const SubMenu = styled.div`
+  align-items: center;
+  display: flex;
+  color: #c0c0c0;
+  padding: 2px 8px 2px 20px;
+  margin: 0 0 0px 0px;
+  font-size: 12px;
+  transition: all 0.3s linear;
   cursor: pointer;
-  transition: 0.3s;
-  color: #dbdbdb;
-  background-color: #57a74c;
-  opacity: 0;
-  /* transform: translateY(20px);
-  transition: opacity 0.3s, transform 0.3s; */
-  animation: slide-in 0.3s forwards;
 
   &:hover {
-    background-color: #adadad;
-  }
-  &.active {
-    background-color: #cecece;
-    /* border-radius: 4px; */
-    border-left: 2px solid gray;
-    color: #2e2e2e;
-  }
-  &.child-active {
-    padding-left: 12px;
-    background-color: white;
-    color: black;
-    font: 14px;
-    font-weight: 600;
-
-    border-left: 2px solid white;
+    background-color: #9879e288;
   }
 
-  &:first-child {
-    margin-top: 4px;
-  }
   &:last-child {
-    margin-bottom: 4px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+
+  &.active {
+    padding: 2px 8px 2px 32px;
   }
 `;
 
-export default function HomeSidebarItem(props: IHomeSidebarItemProps) {
-  const isActive = React.useMemo(() => {
-    const currentLink = window.location.pathname.split("?")[0].split("/")[1];
-    console.log(currentLink, props.link);
-    return currentLink === props.link.split("/")[1];
-  }, [window.location.pathname]);
-
-  const [displayChild, setDisplayChild] = React.useState(false);
+export const MenuItem = (props: ItemProps) => {
   const navigate = useNavigate();
-
-  const handleShowChild = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation();
-    setDisplayChild(!displayChild);
-  };
-
-  const navigateLink = (link: string) => {
-    if (props.link) navigate(link);
-  };
+  const active = React.useMemo(() => {
+    return (
+      props.link === window.location.pathname.slice(0, props?.link?.length || 0)
+    );
+  }, [window.location.pathname]);
+  const [showChild, setShowChild] = React.useState(active);
 
   React.useEffect(() => {
-    if (isActive) setDisplayChild(true);
-  }, [isActive]);
-
+    if (active) setShowChild(true);
+  }, [active]);
   return (
-    <Wrapper>
-      <MainMenu
-        className={`${isActive ? "active" : ""}`}
-        onClick={() => navigateLink(props.link)}
-      >
-        <div className="flex flex-1 gap-2 items-center">
-          {isActive ? props.activeIconL || props.iconL : props.iconL}
-          <p className="text-sm line-clamp-1">{props.title}</p>
+    <ItemWrapper className={`${props.className} ${active ? "active " : ""}`}>
+      <MainMenu onClick={() => props.link && navigate(props.link)}>
+        <div className="icon mr-2">
+          {active ? props.activeIcon || props.icon : props.icon}
         </div>
-        {props.childs ? (
-          <div
-            className="pl-4 py-1"
-            onClick={(event) => handleShowChild(event)}
-          >
-            <FaAngleRight
-              style={{ animationDuration: "0.3s !important" }}
-              className={`${displayChild ? "rotate-r-90 " : ""}`}
-            />
-          </div>
-        ) : null}
+        <p>{props.title}</p>
+        {props.subMenu && props.subMenu?.length > 0 && (
+          <FaAngleRight
+            className={`ml-auto hover:bg-purple-300 rounded-full ${
+              showChild && "duration-200 rotate-90"
+            }`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowChild(!showChild);
+            }}
+          />
+        )}
       </MainMenu>
-      <ChildMenuList className={`${isActive ? "active" : ""}`}>
-        {props?.childs?.length &&
-          displayChild &&
-          props.childs.map((child, index) => {
-            const currentLink = window.location.pathname.split("?")[0];
-            const isChildActive = isActive && currentLink === child.link;
 
+      {showChild && props.subMenu && props.subMenu?.length > 0 && (
+        <SubMenuWrapper className="">
+          {props.subMenu?.map((item, index) => {
+            const active =
+              item.link ===
+              window.location.pathname.slice(0, item?.link?.length || 0);
             return (
-              <ChildMenu
+              <SubMenu
                 key={index}
-                className={`${isChildActive ? "child-active" : ""} ${
-                  isActive ? "active" : ""
-                }`}
-                onClick={() => navigateLink(child.link)}
+                className={`${active ? "active " : ""}`}
+                onClick={() => item.link && navigate(item.link)}
               >
-                {isChildActive ? child.activeIconL || child.iconL : child.iconL}
-                <p>{child.title}</p>
-              </ChildMenu>
+                <div className="mr-2">
+                  {active ? item.activeIcon || item.icon : item.icon}
+                </div>
+                <p>{item.title}</p>
+              </SubMenu>
             );
           })}
-      </ChildMenuList>
-    </Wrapper>
+        </SubMenuWrapper>
+      )}
+    </ItemWrapper>
   );
-}
+};

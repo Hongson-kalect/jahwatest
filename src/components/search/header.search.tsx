@@ -29,11 +29,12 @@ const Wrapper = styled.div`
     position: absolute;
     top: 0;
     right: 0;
-    transition: 0.9s ease;
+    transition: 0.3s ease;
+    transform: translateY(-1px);
   }
 
   & button[type="submit"]:hover {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
     color: rgb(255, 255, 255);
     background-color: #378f37;
   }

@@ -6,7 +6,7 @@ import styled from "styled-components";
 export interface IHeaderOptionProps {
   icon: React.ReactNode;
   title: string;
-  link: string;
+  onClick?: () => void;
 }
 
 const Wrapper = styled.div`
@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 
 export default function HeaderOption(props: IHeaderOptionProps) {
   return (
-    <Wrapper>
+    <Wrapper onClick={props.onClick}>
       <Tooltip title={props.title} placement="bottomLeft">
         {props.icon}
       </Tooltip>

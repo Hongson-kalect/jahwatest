@@ -1,5 +1,6 @@
 import { Image } from "antd";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 export interface ISeftInfoProps {}
@@ -35,6 +36,7 @@ const Profile = styled.table`
 `;
 
 export default function SeftInfo(props: ISeftInfoProps) {
+  const { t } = useTranslation();
   return (
     <Wrapper>
       {/* <div className="w-32"> */}
@@ -48,20 +50,20 @@ export default function SeftInfo(props: ISeftInfoProps) {
       <div className="flex gap-4 flex-1 justify-between">
         <Profile>
           <tr>
-            <td>Tên</td>
+            <td>{t("profile.seft.name")}</td>
             <td>Hung Chays</td>
           </tr>
           <tr>
-            <td>Mã nhân viên</td>
+            <td>{t("profile.seft.code")}</td>
             <td>V22006013</td>
           </tr>
           <tr>
-            <td>Giới tính</td>
+            <td>{t("profile.seft.gender")}</td>
             <td>Nữ</td>
           </tr>
 
           <tr>
-            <td>Ngày sinh</td>
+            <td>{t("profile.seft.dayOfBirth")}</td>
             <td>01/01/2001</td>
           </tr>
           {/* <tr>
@@ -82,19 +84,19 @@ export default function SeftInfo(props: ISeftInfoProps) {
         </Profile>
         <Profile>
           <tr>
-            <td>Bộ phận</td>
+            <td>{t("profile.seft.department")}</td>
             <td>IT</td>
           </tr>
           <tr>
-            <td>Chức vụ</td>
+            <td>{t("profile.seft.duty")}</td>
             <td>Staff</td>
           </tr>
           <tr>
-            <td>Vị trí</td>
+            <td>{t("profile.seft.position")}</td>
             <td>Xưởng 1 - Văn phòng</td>
           </tr>
           <tr>
-            <td>Ngày vào</td>
+            <td>{t("profile.seft.dayIn")}</td>
             <td>11/11/2011</td>
           </tr>
 
@@ -112,20 +114,20 @@ export default function SeftInfo(props: ISeftInfoProps) {
         </Profile>
         <Profile>
           <tr>
-            <td>Hế số lương</td>
+            <td>{t("profile.seft.salaryRank")}</td>
             <td>G01</td>
           </tr>
 
           <tr>
-            <td>Emai</td>
+            <td>{t("profile.seft.email")}</td>
             <td>hungchay@jahwa.co.kr</td>
           </tr>
           <tr>
-            <td>Số điện thoại</td>
+            <td>{t("profile.seft.phoneNumber")}</td>
             <td>0123456789</td>
           </tr>
           <tr>
-            <td>Quê quán</td>
+            <td>{t("profile.seft.address")}</td>
             <td>Đại Đình, Tam Đảo, Vĩnh Phúc</td>
           </tr>
 

@@ -1,5 +1,6 @@
 import TextArea from "antd/es/input/TextArea";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 export interface ISeftInfoProps {}
@@ -53,48 +54,53 @@ export const InfoTable = styled.table`
 // }
 
 export function OtherDetailInfo(props: ISeftInfoProps) {
+  const { t } = useTranslation();
   return (
     <>
       <InfoItem>
-        <p className="font-bold text-blue-500 mb-1">Nghĩa vụ quân sự</p>
+        <p className="font-bold text-blue-500 mb-1">
+          {t("profile.detail.otherInfo.armyInfo")}
+        </p>
         <div
           className="flex bg-white px-2 py-1 ml-2"
           style={{ border: "1px solid gray", borderRadius: "2px" }}
         >
           <InfoTable>
             <tr>
-              <td>Phân loại quân sự</td>
+              <td>{t("profile.detail.otherInfo.armyType")}</td>
               <td>Chiệu - 00</td>
             </tr>
             <tr>
-              <td>Thời gian trong quân sự</td>
+              <td>{t("profile.detail.otherInfo.serviceYear")}</td>
               <td>5 năm</td>
             </tr>
             <tr>
-              <td>Nơi đầu quân</td>
+              <td>{t("profile.detail.otherInfo.serviceAt")}</td>
               <td>Chệu</td>
             </tr>
           </InfoTable>
           <InfoTable>
             <tr>
-              <td>By Army</td>
+              <td>{t("profile.detail.otherInfo.byArmy")}</td>
               <td>Chệu</td>
             </tr>
 
             <tr>
-              <td>Cấp bậc quân sự</td>
+              <td>{t("profile.detail.otherInfo.armyRank")}</td>
               <td>Thượng tá</td>
             </tr>
 
             <tr>
-              <td>Mã nghĩa vụ</td>
+              <td>{t("profile.detail.otherInfo.armyCode")}</td>
               <td>Chệu</td>
             </tr>
           </InfoTable>
         </div>
       </InfoItem>
       <InfoItem>
-        <p className="font-bold text-blue-500 mb-1">Sức khỏe cá nhân</p>
+        <p className="font-bold text-blue-500 mb-1">
+          {t("profile.detail.otherInfo.healthInfo")}
+        </p>
         <div
           className="flex flex-col bg-white px-2 py-1 ml-2"
           style={{ border: "1px solid gray", borderRadius: "2px" }}
@@ -102,37 +108,37 @@ export function OtherDetailInfo(props: ISeftInfoProps) {
           <div className="flex">
             <InfoTable>
               <tr>
-                <td>Chiều cao</td>
+                <td>{t("profile.detail.otherInfo.height")}</td>
                 <td>192 cm</td>
               </tr>
               <tr>
-                <td>Cân nặng</td>
+                <td>{t("profile.detail.otherInfo.weight")}</td>
                 <td>43 kg</td>
               </tr>
               <tr>
-                <td>Nhóm máu</td>
+                <td>{t("profile.detail.otherInfo.bloodType")}</td>
                 <td>X</td>
               </tr>
             </InfoTable>
             <InfoTable>
               <tr>
-                <td>Thị lực trái</td>
+                <td>{t("profile.detail.otherInfo.leftEye")}</td>
                 <td>10/10</td>
               </tr>
 
               <tr>
-                <td>Thị lực phải</td>
+                <td>{t("profile.detail.otherInfo.rightEye")}</td>
                 <td>10/10</td>
               </tr>
 
               <tr>
-                <td>Mù màu</td>
+                <td>{t("profile.detail.otherInfo.blindEye")}</td>
                 <td>Màu Sancroxis</td>
               </tr>
             </InfoTable>
           </div>
           <p className="text-sm m-2 font-bold text-gray-700">
-            Thông tin khác:{" "}
+            {t("profile.detail.otherInfo.otherInfo") + ": "}
             <span className="font-normal text-xs">
               Từ bé giờ viêm cúm A t còn không sợ, sợ q j cúm B
             </span>
@@ -141,29 +147,31 @@ export function OtherDetailInfo(props: ISeftInfoProps) {
       </InfoItem>
 
       <InfoItem>
-        <p className="font-bold text-blue-500 mb-1">Người giới thiệu</p>
+        <p className="font-bold text-blue-500 mb-1">
+          {t("profile.detail.otherInfo.introducer")}
+        </p>
         <div
           className="flex bg-white px-2 py-1 ml-2"
           style={{ border: "1px solid gray", borderRadius: "2px" }}
         >
           <InfoTable>
             <tr>
-              <td>Tên</td>
+              <td>{t("profile.detail.otherInfo.name")}</td>
               <td>Ning la xing a xỉn</td>
             </tr>
             <tr>
-              <td>Nơi làm việc</td>
+              <td>{t("profile.detail.otherInfo.workPlace")}</td>
               <td>Văn phòng chủ tịch nước</td>
             </tr>
           </InfoTable>
           <InfoTable>
             <tr>
-              <td>Mối quan hệ</td>
+              <td>{t("profile.detail.otherInfo.relationship")}</td>
               <td>Đệ của mị</td>
             </tr>
 
             <tr>
-              <td>Chức vụ</td>
+              <td>{t("profile.detail.otherInfo.position")}</td>
               <td>Bảo vệ</td>
             </tr>
           </InfoTable>
@@ -171,38 +179,40 @@ export function OtherDetailInfo(props: ISeftInfoProps) {
       </InfoItem>
 
       <InfoItem>
-        <p className="font-bold text-blue-500 mb-1">Hạng mục khác</p>
+        <p className="font-bold text-blue-500 mb-1">
+          {t("profile.detail.otherInfo.jobInfo")}
+        </p>
         <div
           className="flex bg-white px-2 py-1 ml-2"
           style={{ border: "1px solid gray", borderRadius: "2px" }}
         >
           <InfoTable>
             <tr>
-              <td>Phân loại thương binh</td>
+              <td>{t("profile.detail.otherInfo.soldierType")}</td>
               <td>Chệu</td>
             </tr>
             <tr>
-              <td>Phân loại tàn tật</td>
+              <td>{t("profile.detail.otherInfo.speciality")}</td>
               <td>Chệu</td>
             </tr>
             <tr>
-              <td>Kĩ năng đặc biệt</td>
+              <td>{t("profile.detail.otherInfo.specialSkill")}</td>
               <td>Ăn cơm bằng bát</td>
             </tr>
           </InfoTable>
           <InfoTable>
             <tr>
-              <td>Mức trợ cấp</td>
+              <td>{t("profile.detail.otherInfo.allowance")}</td>
               <td>-4 chệu</td>
             </tr>
 
             <tr>
-              <td>Mức độ tàn tật</td>
+              <td>{t("profile.detail.otherInfo.injuryLevel")}</td>
               <td>Đếu</td>
             </tr>
 
             <tr>
-              <td>Tôn giáo</td>
+              <td>{t("profile.detail.otherInfo.religion")}</td>
               <td>Đếu</td>
             </tr>
           </InfoTable>

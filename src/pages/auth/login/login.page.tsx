@@ -7,6 +7,7 @@ import jahwaView from "../../../assets/image/jahwa_view.png";
 
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 export interface ILoginPageProps {}
 
 const Wrapper = styled.div`
@@ -20,7 +21,7 @@ const Wrapper = styled.div`
 
 export default function LoginPage(props: ILoginPageProps) {
   const navigate = useNavigate();
-  // const navi;
+  const { t } = useTranslation();
   // const session = await getSession();
   // const t = useTranslations("Index");
 
@@ -65,7 +66,7 @@ export default function LoginPage(props: ILoginPageProps) {
         style={{ minWidth: "300px" }}
       >
         <div className="text-2xl font-bold mb-1 text-[#1e0e4b] text-center">
-          Welcome back to
+          {t("loginPage.welcome")}
         </div>
         <span className="text-3xl font-bold mb-4 text-[#7747ff]">
           Jahwa "Nương"
@@ -86,7 +87,7 @@ export default function LoginPage(props: ILoginPageProps) {
               htmlFor="email"
               className="block text-gray-700 cursor-text leading-[140%] font-normal mb-2"
             >
-              {/* {t("title")} */}
+              {t("loginPage.username")}
             </label>
             <input
               // value={username}
@@ -104,7 +105,7 @@ export default function LoginPage(props: ILoginPageProps) {
               htmlFor="password"
               className="block text-gray-700 cursor-text leading-[140%] font-normal mb-2"
             >
-              Password
+              {t("loginPage.password")}
             </label>
 
             <input
@@ -127,25 +128,27 @@ export default function LoginPage(props: ILoginPageProps) {
                 name="remember"
                 id="remember"
               />
-              <p className="text-sm text-blue-600 italic">Lưu tài khoản</p>
+              <p className="text-sm text-blue-600 italic">
+                {t("loginPage.saveAccount")}
+              </p>
             </div>
             <div>
               <a className="text-xs text-[#7747ff] italic" href="#">
-                Quên mật khẩu?
+                {t("loginPage.forgotAccount")}
               </a>
             </div>
           </div>
           <button
             className="bg-[#7747ff] m-auto px-6 py-2 rounded text-white text-lg w-full"
-            onClick={() => navigate("/home/main")}
+            onClick={() => navigate("/home")}
           >
-            Đăng nhập
+            {t("loginPage.login")}
           </button>
         </form>
         <div className="text-sm text-center mt-[1.6rem]">
-          Lần đầu đăng nhập?{" "}
+          {t("loginPage.newMember")}{" "}
           <a className="text-sm text-[#7747ff]" href="#">
-            Tạo mật khẩu!
+            {t("loginPage.createPassword")}
           </a>
         </div>
         {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}

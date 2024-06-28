@@ -5,6 +5,7 @@ import SeftInfo from "./seft-info";
 import { SeftDetailInfo } from "../profile-tabs/seft-info.tabs";
 import { CompanyDetailInfo } from "../profile-tabs/company-info-tabs";
 import { OtherDetailInfo } from "../profile-tabs/other-info.tabs";
+import { useTranslation } from "react-i18next";
 
 export interface ICompanyInfoProps {}
 
@@ -72,30 +73,28 @@ const InforTabs = styled(Tabs)`
   }
 `;
 
-const infoTabs = [
-  {
-    key: "seft",
-    label: <div>Thông tin cá nhân</div>,
-    children: <SeftDetailInfo />,
-  },
-  {
-    key: "company",
-    label: <div>Hạng mục công ty</div>,
-    children: <CompanyDetailInfo />,
-  },
-  {
-    key: "other",
-    label: <div>Thông tin khác</div>,
-    children: <OtherDetailInfo />,
-  },
-  // {
-  //   key: "address",
-  //   label: <div>Thông tin Liên hệ</div>,
-  //   children: <div>Tab thoong tin cas nhaan</div>,
-  // },
-];
-
 export default function Detail(props: ICompanyInfoProps) {
+  const { t } = useTranslation();
+
+  const infoTabs = React.useMemo(() => {
+    return [
+      {
+        key: "seft",
+        label: <div>{t("profile.detail.seftInfo.title")}</div>,
+        children: <SeftDetailInfo />,
+      },
+      {
+        key: "company",
+        label: <div>{t("profile.detail.companyInfo.title")}</div>,
+        children: <CompanyDetailInfo />,
+      },
+      {
+        key: "other",
+        label: <div>{t("profile.detail.otherInfo.title")}</div>,
+        children: <OtherDetailInfo />,
+      },
+    ];
+  }, [t]);
   const onChange = (key: string) => {
     console.log(key);
   };

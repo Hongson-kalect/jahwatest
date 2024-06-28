@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import jahwaLogo from "src/assets/image/jahwa_logo.jpg";
-import { RiLogoutBoxRFill } from "react-icons/ri";
+import { RiLogoutBoxRFill, RiNotification3Fill } from "react-icons/ri";
 import HeaderOption from "src/components/items/header.options";
 import { Avatar, Image, Select } from "antd";
 
@@ -12,6 +12,9 @@ import cnFlag from "src/assets/image/cn-flag.png";
 import enFlag from "src/assets/image/en-flag.png";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { HeaderSearch } from "src/components/search/header.search";
+import { FaSignOutAlt } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export interface IHomeHeaderProps {}
 
@@ -35,8 +38,7 @@ const tinvit = [
 
 const Wrapper = styled.div`
   height: 56px;
-  padding: 0 12px;
-  background-color: white;
+  background: linear-gradient(90deg, #af68f2 0%, #30a19a 87%, #ffffff 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,7 +55,7 @@ const languages: DefaultOptionType[] = [
             background: `url(${vnFlag}) center center /contain no-repeat`,
           }}
         ></div>
-        <p className="font-semibold" style={{ fontSize: "11px" }}>
+        <p className="font-semibold" style={{ fontSize: "12px" }}>
           VN
         </p>
       </div>
@@ -69,7 +71,7 @@ const languages: DefaultOptionType[] = [
             background: `url(${krFlag}) center center /contain no-repeat`,
           }}
         ></div>
-        <p className="font-semibold" style={{ fontSize: "11px" }}>
+        <p className="font-semibold" style={{ fontSize: "12px" }}>
           KR
         </p>
       </div>
@@ -85,7 +87,7 @@ const languages: DefaultOptionType[] = [
             background: `url(${cnFlag}) center center /contain no-repeat`,
           }}
         ></div>
-        <p className="font-semibold" style={{ fontSize: "11px" }}>
+        <p className="font-semibold" style={{ fontSize: "12px" }}>
           CN
         </p>
       </div>
@@ -101,7 +103,7 @@ const languages: DefaultOptionType[] = [
             background: `url(${enFlag}) center center /contain no-repeat`,
           }}
         ></div>
-        <p className="font-semibold" style={{ fontSize: "11px" }}>
+        <p className="font-semibold" style={{ fontSize: "12px" }}>
           EN
         </p>
       </div>
@@ -110,7 +112,16 @@ const languages: DefaultOptionType[] = [
 ];
 
 export default function HomeHeader(props: IHomeHeaderProps) {
-  const [language, setLanguage] = React.useState("vi");
+  const navigate = useNavigate();
+  const { i18n } = useTranslation();
+  const [language, setLanguage] = React.useState(() => {
+    return localStorage.getItem("language") || "vi";
+  });
+
+  React.useEffect(() => {
+    localStorage.setItem("language", language || "vi");
+    i18n.changeLanguage(language || "vi");
+  }, [language]);
 
   return (
     <Wrapper>
@@ -129,20 +140,24 @@ export default function HomeHeader(props: IHomeHeaderProps) {
 
       <div className="options flex justify-center items-center gap-2">
         <div className="relative">
-          <MdOutlineNotificationsActive size={24} color="brown" />
+          <RiNotification3Fill
+            color="#ffaa00"
+            size={32}
+            className="border bg-white rounded-full p-0.5"
+          />
           <p
-            className="absolute -top-1.5 right-2 py-0 bg-red-500 text-white rounded-full px-2"
-            style={{ fontSize: "10px" }}
+            className="absolute -top-2 right-2 py-0  text-red-600 bg-white rounded-full px-2 shadow shadow-black"
+            style={{ fontSize: "12px" }}
           >
             24
           </p>
         </div>
         <div className="flex flex-col text-xs font-semibold w-24 ">
-          <div className="text-gray-700 overflow-ellipsis text-nowrap overflow-hidden">
-            Tạ Thị Tòm Tem
+          <div className="text-white overflow-ellipsis text-nowrap overflow-hidden">
+            Nguyễn Thùy Linh
           </div>
-          <div className="overflow-ellipsis text-nowrap overflow-hidden text-gray-400 pl-2">
-            tt.thanh@jawha.co.kr
+          <div className="overflow-ellipsis text-nowrap overflow-hidden text-gray-200 pl-2">
+            nt.linh@jawha.co.kr
           </div>
         </div>
 
@@ -154,7 +169,7 @@ export default function HomeHeader(props: IHomeHeaderProps) {
         </div>
 
         <Select
-          className="w-20"
+          className="w-20 rounded-none"
           value={language}
           onChange={(value) => setLanguage(value)}
           options={languages}
@@ -163,19 +178,19 @@ export default function HomeHeader(props: IHomeHeaderProps) {
         <HeaderOption
           icon={
             <div
-              className="text-xs font-semibold text-white 
-            px-2 py-1 rounded-full bg-green-700"
+              className="text-sm font-semibold text-white 
+            px-4 py-1.5 rounded-full bg-green-700"
             >
               GW
             </div>
           }
-          link="/home/main"
+          onClick={() => window.open("https://gw.jahwa.co.kr/", "_blank")}
           title="Đến GW"
         />
 
         <HeaderOption
-          icon={<RiLogoutBoxRFill color="#d32222" size={28} />}
-          link="/home/main"
+          icon={<FaSignOutAlt color="red" size={28} />}
+          onClick={() => navigate("/login")}
           title="Đăng xuất"
         />
       </div>
