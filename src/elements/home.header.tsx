@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
-import jahwaLogo from "src/assets/image/jahwa_logo.jpg";
+import jahwaLogo from "src/assets/image/icon3.png";
 import { RiLogoutBoxRFill, RiNotification3Fill } from "react-icons/ri";
 import HeaderOption from "src/components/items/header.options";
-import { Avatar, Image, Select } from "antd";
+import { Avatar, Col, Image, Row, Select, Tooltip } from "antd";
 
 import { DefaultOptionType } from "antd/es/select";
 import vnFlag from "src/assets/image/vn-flag.jfif";
@@ -36,8 +36,8 @@ const tinvit = [
   },
 ];
 
-const Wrapper = styled.div`
-  height: 56px;
+const Wrapper = styled(Row)`
+  height: 42px;
   background: linear-gradient(90deg, #af68f2 0%, #30a19a 87%, #ffffff 100%);
   display: flex;
   justify-content: space-between;
@@ -113,6 +113,7 @@ const languages: DefaultOptionType[] = [
 
 export default function HomeHeader(props: IHomeHeaderProps) {
   const navigate = useNavigate();
+  const [showOption, setShowOption] = React.useState(false);
   const { i18n } = useTranslation();
   const [language, setLanguage] = React.useState(() => {
     return localStorage.getItem("language") || "vi";
@@ -125,75 +126,111 @@ export default function HomeHeader(props: IHomeHeaderProps) {
 
   return (
     <Wrapper>
-      <div className="left bg-white flex h-full w-60 items-end justify-start">
-        <div
-          className="w-2/5 h-full"
-          style={{
-            background: `url(${jahwaLogo}) center center / contain no-repeat`,
-          }}
-        ></div>
-        <p className="text-green-600 font-bold uppercase text-xs -ml-4 mb-1">
-          Jahwa vina
-        </p>
-      </div>
-      <HeaderSearch />
-
-      <div className="options flex justify-center items-center gap-2">
-        <div className="relative">
-          <RiNotification3Fill
-            color="#ffaa00"
-            size={32}
-            className="border bg-white rounded-full p-0.5"
-          />
-          <p
-            className="absolute -top-2 right-2 py-0  text-red-600 bg-white rounded-full px-2 shadow shadow-black"
-            style={{ fontSize: "12px" }}
+      <Col xs={4} lg={4} className="h-full">
+        <Row className="left flex h-full items-end justify-start">
+          <Col></Col>
+          <Col
+            xs={24}
+            md={24}
+            lg={{ span: 14 }}
+            className="h-full"
+            style={{
+              background: `url(${jahwaLogo}) center center / contain no-repeat`,
+            }}
+          ></Col>
+          <Col
+            xs={0}
+            md={{ span: 0 }}
+            lg={{ span: 6 }}
+            // span={8}
+            className="text-green-600 font-bold uppercase text-xs -ml-4 mb-1"
           >
-            24
-          </p>
-        </div>
-        <div className="flex flex-col text-xs font-semibold w-24 ">
-          <div className="text-white overflow-ellipsis text-nowrap overflow-hidden">
-            Nguyễn Thùy Linh
-          </div>
-          <div className="overflow-ellipsis text-nowrap overflow-hidden text-gray-200 pl-2">
-            nt.linh@jawha.co.kr
-          </div>
-        </div>
-
-        <div className="w-8 h-8 overflow-hidden rounded-full">
-          <Image
-            className="rounded-full"
-            src="https://mayanhhoangto.com/wp-content/uploads/2022/08/giu-lung-va-dau-thang.jpg"
-          />
-        </div>
-
-        <Select
-          className="w-20 rounded-none"
-          value={language}
-          onChange={(value) => setLanguage(value)}
-          options={languages}
-        />
-
-        <HeaderOption
-          icon={
-            <div
-              className="text-sm font-semibold text-white 
-            px-4 py-1.5 rounded-full bg-green-700"
-            >
-              GW
+            Jahwa vina
+          </Col>
+        </Row>
+      </Col>
+      <Col xs={{ span: 10, offset: 2 }} lg={{ span: 12, offset: 0 }}>
+        <HeaderSearch />
+      </Col>
+      <Col xs={8} lg={8} className="overflow-hidden">
+        <Row className="options h-full flex justify-center items-center">
+          <Col xs={10} md={10} lg={4}>
+            <div className="relative">
+              <RiNotification3Fill
+                color="#ffaa00"
+                size={20}
+                className="float-right border bg-white rounded-full p-0.5"
+              />
+              <p
+                className="absolute -top-1 right-3 py-0  text-red-600 bg-white rounded-full px-0.5 shadow shadow-black"
+                style={{ fontSize: "10px" }}
+              >
+                24
+              </p>
             </div>
-          }
-          onClick={() => window.open("https://gw.jahwa.co.kr/", "_blank")}
-          title="Đến GW"
-        />
+          </Col>
+          <Col xs={0} md={0} lg={6} className="px-1">
+            <div className="flex flex-col text-xs font-semibold w-full ">
+              <div className="text-white overflow-ellipsis text-nowrap overflow-hidden">
+                Nguyễn Thùy Linh
+              </div>
+              <div className="overflow-ellipsis text-nowrap overflow-hidden text-gray-200 pl-2">
+                nt.linh@jawha.co.kr
+              </div>
+            </div>
+          </Col>
+          <Col xs={14} md={14} lg={3}>
+            <div className="mr-2 float-right overflow-hidden">
+              {/* <Col xs={0} md={0} lg={4}> */}
+              <Select
+                size="small"
+                suffixIcon={null}
+                className="w-full rounded-none !outline-none !border-none !shadow-none"
+                value={language}
+                onChange={(value) => setLanguage(value)}
+                options={languages}
+              />
+              {/* </Col> */}
+              {/* <Tooltip className="" title={<div>?? có j hot?</div>}>
+                <Avatar
+                  onClick={() => setShowOption(!showOption)}
+                  className="rounded-full float-right"
+                  src="https://mayanhhoangto.com/wp-content/uploads/2022/08/giu-lung-va-dau-thang.jpg"
+                />
+              </Tooltip> */}
+            </div>
+          </Col>
+          <Col xs={0} md={0} lg={4}>
+            <Select
+              className="w-full rounded-none"
+              value={language}
+              onChange={(value) => setLanguage(value)}
+              options={languages}
+            />
+          </Col>
+          <Col xs={0} md={0} lg={2}>
+            {" "}
+            <HeaderOption
+              icon={<FaSignOutAlt color="red" size={28} />}
+              onClick={() => navigate("/login")}
+              title="Đăng xuất"
+            />
+          </Col>
 
-        <HeaderOption
-          icon={<FaSignOutAlt color="red" size={28} />}
-          onClick={() => navigate("/login")}
-          title="Đăng xuất"
-        />
-      </div>
+          {/* <HeaderOption
+            icon={
+              <div
+                className="text-sm font-semibold text-white 
+            px-4 py-1.5 rounded-full bg-green-700"
+              >
+                GW
+              </div>
+            }
+            onClick={() => window.open("https://gw.jahwa.co.kr/", "_blank")}
+            title="Đến GW"
+          /> */}
+        </Row>
+      </Col>
     </Wrapper>
   );
 }

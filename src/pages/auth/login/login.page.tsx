@@ -4,13 +4,15 @@
 // import { useTranslations } from "next-intl";
 import * as React from "react";
 import jahwaView from "../../../assets/image/jahwa_view.png";
+import jahwaLogo from "../../../assets/image/jahwa_logo.jpg";
 
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { Col, Row } from "antd";
 export interface ILoginPageProps {}
 
-const Wrapper = styled.div`
+const Wrapper = styled(Row)`
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -61,16 +63,28 @@ export default function LoginPage(props: ILoginPageProps) {
 
   return (
     <Wrapper>
-      <div
-        className="relative flex flex-col w-1/3  p-8 rounded-md text-black bg-white items-center"
-        style={{ minWidth: "300px" }}
+      <Col
+        className="relative flex-col p-8 pt-0 rounded-md text-black bg-white items-center"
+        lg={8}
+        md={12}
+        sm={16}
+        xs={20}
+        // style={{ minWidth: "300px" }}
       >
+        <div className="flex justify-center mb-4">
+          <div
+            className="bg w-1/2 h-16 bg-red-400"
+            style={{
+              background: `url(${jahwaLogo}) center center / contain no-repeat`,
+            }}
+          ></div>
+        </div>
         <div className="text-2xl font-bold mb-1 text-[#1e0e4b] text-center">
           {t("loginPage.welcome")}
         </div>
-        <span className="text-3xl font-bold mb-4 text-[#7747ff]">
+        <div className="text-3xl font-bold mb-4 text-[#7747ff] text-center">
           Jahwa "Nương"
-        </span>
+        </div>
         <div className=" font-normal mb-4 text-center text-[#1e0e4b]">
           {/* Đăng nhập */}
         </div>
@@ -152,7 +166,7 @@ export default function LoginPage(props: ILoginPageProps) {
           </a>
         </div>
         {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
-      </div>
+      </Col>
     </Wrapper>
   );
 }

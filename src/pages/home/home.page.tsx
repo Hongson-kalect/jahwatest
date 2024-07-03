@@ -1,4 +1,4 @@
-import { Col, FloatButton, Row, Select } from "antd";
+import { Button, Col, DatePicker, Empty, FloatButton, Row, Select } from "antd";
 import * as React from "react";
 import MainLayout from "src/layouts/main.layout";
 import styled, { keyframes } from "styled-components";
@@ -6,7 +6,7 @@ import HomeNewItem from "./components/home.new.item";
 import { RadioGroup } from "./components/radioGroup";
 import Calendar from "react-calendar";
 import { FaPersonDigging } from "react-icons/fa6";
-import { FaCalendar } from "react-icons/fa";
+import { FaCalendar, FaInfoCircle } from "react-icons/fa";
 import homeImage from "src/assets/image/doanhnhan.png";
 import homeImageBg from "src/assets/image/qqq.png";
 import HomeNavigateItem from "./components/home.navigate.item";
@@ -19,15 +19,17 @@ import letterBg from "src/assets/image/letterBG.png";
 import contactBg from "src/assets/image/contactBg.jfif";
 import { PiNewspaperClippingBold } from "react-icons/pi";
 import { useTranslation } from "react-i18next";
+import { MdOutlineBarChart, MdOutlineContentPasteSearch } from "react-icons/md";
 
 export interface ITestProps {}
 
 const Wrapper = styled(Row)`
   height: 100%;
   flex: 1;
+  flex-direction: column;
   /* overflow: auto; */
   display: flex;
-  background-color: white;
+  /* background-color: white; */
   border-radius: 4px;
 `;
 
@@ -64,11 +66,13 @@ const CustomSelect = styled(Select)`
 `;
 
 const StyledCalendar = styled(Calendar)`
-  border: none;
-  /* border-radius: 4px; */
+  margin-top: 8px;
+  border-radius: 2px;
   outline: none !important;
 
-  width: 250px;
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 2px 0px;
 
   .react-calendar__viewContainer {
     flex: 1;
@@ -83,6 +87,11 @@ const StyledCalendar = styled(Calendar)`
           flex-direction: column;
           & > div:last-child {
             flex: 1;
+            button {
+              padding: 4px !important;
+              font-size: 14px;
+              border: 0.5px solid #eee;
+            }
           }
         }
       }
@@ -121,6 +130,70 @@ const NavigationTab = styled.div`
   flex: 1;
 `;
 
+const StyledTable = styled.table`
+  padding: 2px 40px;
+  border-radius: 12px;
+  width: 100%;
+  tr {
+    &:first-child td {
+      background-color: #00aaff;
+      color: white !important;
+      font-weight: bold;
+      text-align: center;
+      font-size: 15px;
+      /* border-radius: 12px; */
+      td {
+        /* border-radius: 12px; */
+      }
+    }
+
+    &:last-child td {
+      font-size: 12px !important;
+      color: red;
+      font-weight: 500;
+      font-style: italic;
+    }
+  }
+  border-collapse: collapse;
+  td {
+    border-bottom: 1px solid #ededed;
+    padding: 2px;
+    text-align: center;
+    font-size: 12px;
+
+    &:nth-child(1),
+    &:nth-child(3) {
+      padding-left: 8px;
+      text-align: left !important;
+      font-weight: bold;
+      color: #333;
+    }
+  }
+`;
+
+const DayDetailTable = styled.table`
+  td {
+    color: #333;
+    padding: 0px 4px;
+    font-size: 12px;
+
+    &:first-child {
+      font-weight: bold;
+    }
+  }
+`;
+
+const UnderLineSelect = styled(Select)`
+  & .ant-select-selector {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none;
+    border-bottom: 1px solid gray !important ;
+    border-radius: 0 !important;
+  }
+  /* outline: none !important; */
+`;
+
 export default function Home(props: ITestProps) {
   const [value, onChange] = React.useState<Value>(new Date());
   const [expandCalendar, setExpanCalendar] = React.useState(false);
@@ -129,137 +202,324 @@ export default function Home(props: ITestProps) {
   const { t, i18n } = useTranslation();
 
   return (
-    <Wrapper className="">
-      <div className="h-full flex-1 relative">
-        <MainContent>
-          <div
-            className="flex gap-4 h-1/2 justify-between"
-            style={{
-              background: `linear-gradient(
+    <Wrapper className="bg-gray-200  overflow-auto">
+      <Col className="px-2 h-44">
+        <div className="wrapper pt-5">
+          <div className=" bg-white relative p-2">
+            <div className="flex justify-center items-center text-gray-400  gap-2 absolute -top-4 right-2 bg-transparent">
+              <MdOutlineBarChart size={14} />
+              <p className="text-center text-xs font-bold italic">
+                Thống kê tháng này
+              </p>
+            </div>
+            <StyledTable>
+              <tbody className="border">
+                <tr>
+                  <td>Tiêu chí</td>
+                  <td>Ngày</td>
+                  <td>Tiêu chí</td>
+                  <td>Giờ</td>
+                </tr>
+                <tr>
+                  <td>Làm ngày</td>
+                  <td>14.5</td>
+                  <td>T/C ngày</td>
+                  <td>14.5</td>
+                </tr>
+                <tr>
+                  <td>Làm đêm</td>
+                  <td>14.5</td>
+                  <td>T/C đêm</td>
+                  <td>14.5</td>
+                </tr>
+                <tr>
+                  <td>Chủ nhật</td>
+                  <td>14.5</td>
+                  <td>T/C Chủ nhật</td>
+                  <td>14.5</td>
+                </tr>
+                <tr>
+                  <td>Ngày lễ</td>
+                  <td>14.5</td>
+                  <td>T/C Ngày lễ</td>
+                  <td>14.5</td>
+                </tr>
+                <tr>
+                  <td>Đi muộn (phút/lần)</td>
+                  <td>42/2</td>
+                  <td>Về sớm (phút/lần)</td>
+                  <td>42/2</td>
+                </tr>
+              </tbody>
+            </StyledTable>
+          </div>
+        </div>
+      </Col>
+      <Col style={{ height: "calc(100% - 212px)" }} className="mt-5">
+        <div className="wrapper p-2">
+          <div className="flex flex-col relative bg-white">
+            <div className="flex justify-center items-center text-gray-400  gap-2 absolute -top-4 right-2 bg-transparent">
+              <FaInfoCircle size={14} />
+              <p className="text-center text-xs font-bold italic">
+                Chi tiết lịch làm việc
+              </p>
+            </div>
+
+            <div className="flex justify-end items-center text-indigo-600  gap-2 mt-2">
+              <UnderLineSelect
+                size="small"
+                className="w-1/3 "
+                options={[{ label: "4/2024", value: "4/2024" }]}
+                suffixIcon={<FaCalendar />}
+              />
+              <Button
+                size="small"
+                type="primary"
+                icon={<MdOutlineContentPasteSearch />}
+              >
+                Tra cứu
+              </Button>
+            </div>
+            <div className="px-2 py-1 flex items-center">
+              <StyledCalendar
+                showNeighboringMonth={false}
+                // calendarType="islamic"
+                tileContent={({ date, view }) => {
+                  const day = date.getDate();
+                  return (
+                    <div className="flex justify-center">
+                      <div
+                        className={`h-1 w-5/6 flex bg-green-400 ${
+                          day > 15 ? "shadow-black r" : "shadow-white"
+                        } shadow`}
+                      >
+                        {date.getDate() === 1 && (
+                          <>
+                            <div className="bg-cyan-600 flex-1 h-full"></div>
+                            <div className="bg-red-600 flex-1 h-full"></div>
+                            <div className="bg-orange-500 flex-1 h-full"></div>
+                            <div className="bg-pink-500 flex-1 h-full"></div>
+                            <div className="bg-gray-500 flex-1 h-full"></div>
+                          </>
+                        )}
+                        {date.getDate() === 2 && (
+                          <div className="bg-red-600 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 3 && (
+                          <div className="bg-orange-500 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 4 && (
+                          <div className="bg-pink-500 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 5 && (
+                          <div className="bg-gray-500 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 6 && (
+                          <div
+                            className="bg-gradient-to-r from-green-400 to-black flex-1 h-full"
+                            style={{ fontSize: "20px" }}
+                          ></div>
+                        )}
+                        {date.getDate() === 7 && (
+                          <div className="bg-red-600 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 8 && (
+                          <div className="bg-cyan-600 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 9 && (
+                          <div className="bg-cyan-600 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 18 && (
+                          <>
+                            <div className="bg-cyan-600 flex-1 h-full"></div>
+                            <div className="bg-red-600 flex-1 h-full"></div>
+                            <div className="bg-orange-500 flex-1 h-full"></div>
+                            <div className="bg-pink-500 flex-1 h-full"></div>
+                            <div className="bg-gray-500 flex-1 h-full"></div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  );
+                }}
+                onChange={onChange}
+                showNavigation={false}
+                showWeekNumbers={false}
+                value={value}
+              />
+
+              <div className="w-1/4 flex flex-col items-center justify-center">
+                <p
+                  style={{ fontSize: "10px" }}
+                  className="mb-1 underline italic"
+                >
+                  Chú thích
+                </p>
+                <div className="bg-green-400 h-1 w-4"></div>
+                <p style={{ fontSize: "10px" }} className="mb-1 text-green-400">
+                  Thường
+                </p>
+                <div className="bg-cyan-600 h-1 w-4"></div>
+                <p style={{ fontSize: "10px" }} className="mb-1 text-cyan-600">
+                  Tăng ca
+                </p>
+                <div className="bg-red-600 h-1 w-4"></div>
+                <p style={{ fontSize: "10px" }} className="mb-1 text-red-600">
+                  Nghỉ KP
+                </p>
+                <div className="bg-orange-500 h-1 w-4"></div>
+                <p
+                  style={{ fontSize: "10px" }}
+                  className="mb-1 text-orange-500"
+                >
+                  Nghỉ P
+                </p>
+                <div className="bg-pink-500 h-1 w-4"></div>
+                <p style={{ fontSize: "10px" }} className="mb-1 text-pink-500">
+                  Đi muộn
+                </p>
+                <div className="bg-purple-500 h-1 w-4"></div>
+                <p
+                  style={{ fontSize: "10px" }}
+                  className="mb-1 text-purple-500"
+                >
+                  Về sớm
+                </p>
+
+                <div className="shadow shadow-black h-0.5 bg-transparent w-4"></div>
+                <p style={{ fontSize: "10px" }} className="text-xs">
+                  Ca đêm
+                </p>
+              </div>
+            </div>
+            <div className="px-2 py-1 flex-1 mt-2">
+              <div className="border px-2 py-1">
+                <p className="underline text-gray-500 text-xs">
+                  Chi tiết ngày:
+                </p>
+
+                <div className="px-1">
+                  {/* <Empty /> */}
+
+                  <DayDetailTable>
+                    <tbody>
+                      <tr>
+                        <td>Chấm công:</td>
+                        <td>8:14:16</td>
+                      </tr>
+                      <tr>
+                        <td>Tan làm:</td>
+                        <td>17:51:14</td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </DayDetailTable>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Col>
+
+      {/* <Col xs={0} lg={24} className="flex-1">
+        <Row
+          className="flex justify-between h-full relative"
+          style={{
+            background: `linear-gradient(
               rgba(2, 215, 231, 0.92) 0%,
               rgba(175, 175, 175, 0.95) 80%,
               rgba(197, 155, 155, 0.97) 100%
             ), url(${homeImageBg}) center center /cover no-repeat`,
-            }}
-          >
-            <div className="flex flex-col h-full px-8 flex-1 text-center items-center justify-center gap-2">
-              <p className="text-6xl font-bold text-center text-blue-700 pt-7 mb-3 ">
-                JAHWA VINA <span className="text-3xl">co.,LTD</span>
-              </p>
-              <p className="text-xl text-left font-semibold text-red-700">
-                {t("homePage.slogan-1")}
-              </p>
-              <p className="text-base text-left font-semibold text-blue-900">
-                {t("homePage.slogan-2")}
-              </p>
-              <p className="text-base text-left font-semibold">
-                {t("homePage.slogan-3")}
-              </p>
+          }}
+        >
+          <Col xs={0} lg={16}>
+            <div className="flex gap-4 justify-between">
+              <div className="flex flex-col h-full px-8 flex-1 text-center items-center justify-center gap-2">
+                <p className="text-6xl font-bold text-center text-blue-700 pt-7 mb-3 ">
+                  JAHWA VINA <span className="text-3xl">co.,LTD</span>
+                </p>
+                <p className="text-xl text-left font-semibold text-red-700">
+                  {t("homePage.slogan-1")}
+                </p>
+                <p className="text-base text-left font-semibold text-blue-900">
+                  {t("homePage.slogan-2")}
+                </p>
+                <p className="text-base text-left font-semibold">
+                  {t("homePage.slogan-3")}
+                </p>
+              </div>
             </div>
+          </Col>
+          <Col span={8}>
             <div
-              className="w-1/3 h-full"
+              className="h-full"
               style={{
                 background: `url(${homeImage}) center center /cover no-repeat`,
               }}
             ></div>
-          </div>
-          <NavigationTab className="h-1/2 gap-1 p-1 text-center bg-white">
-            <Row className="h-1/2">
-              <HomeNavigateItem
-                background={`linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%), url(${moneyBg}) center center / cover no-repeat`}
-                title={t("homePage.wageTitle")}
-                description={t("homePage.wageDecribe")}
-                link="/wage"
-              />
-              <HomeNavigateItem
-                background={`linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%), url(${workerBg}) center center / cover no-repeat`}
-                title={t("homePage.businessTitle")}
-                description={t("homePage.businessDecribe")}
-                link="/business"
-              />
-              <HomeNavigateItem
-                background={`linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%), url(${relaxBg}) center center / cover no-repeat`}
-                title={t("homePage.dayOffTitle")}
-                description={t("homePage.dayOffDecribe")}
-                link="/day-off"
-              />
-            </Row>
-            <Row
-              className="h-1/2 overflow-auto"
-              // style={{ padding: "4px 5%" }}
-            >
-              <HomeNavigateItem
-                background={`linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%), url(${mirrorBg}) center center / cover no-repeat`}
-                title={t("homePage.profileTitle")}
-                description={t("homePage.profileDecribe")}
-                link="/infomation"
-              />
-              <HomeNavigateItem
-                background={`linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%), url(${letterBg}) center center / cover no-repeat`}
-                title={t("homePage.mailTitle")}
-                description={t("homePage.mailDecribe")}
-                link="/infomation"
-              />
-              <HomeNavigateItem
-                background={`linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%), url(${contactBg}) center center / cover no-repeat`}
-                title={t("homePage.contactTitle")}
-                description={t("homePage.contactDecribe")}
-                link="/infomation"
-              />
-            </Row>
-          </NavigationTab>
-        </MainContent>
+          </Col>
+        </Row>
+      </Col>
+      <Col className="flex-1">
+        <NavigationTab className="gap-1 p-1 h-full text-center bg-white">
+          <Row className="h-1/2">
+            <HomeNavigateItem
+              background={`linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%), url(${moneyBg}) center center / cover no-repeat`}
+              title={t("homePage.wageTitle")}
+              description={t("homePage.wageDecribe")}
+              link="/wage"
+            />
+            <HomeNavigateItem
+              background={`linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%), url(${workerBg}) center center / cover no-repeat`}
+              title={t("homePage.businessTitle")}
+              description={t("homePage.businessDecribe")}
+              link="/business"
+            />
+            <HomeNavigateItem
+              background={`linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%), url(${relaxBg}) center center / cover no-repeat`}
+              title={t("homePage.dayOffTitle")}
+              description={t("homePage.dayOffDecribe")}
+              link="/day-off"
+            />
+          </Row>
+          <Row className="h-1/2 overflow-auto">
+            <HomeNavigateItem
+              background={`linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%), url(${mirrorBg}) center center / cover no-repeat`}
+              title={t("homePage.profileTitle")}
+              description={t("homePage.profileDecribe")}
+              link="/infomation"
+            />
+            <HomeNavigateItem
+              background={`linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%), url(${letterBg}) center center / cover no-repeat`}
+              title={t("homePage.mailTitle")}
+              description={t("homePage.mailDecribe")}
+              link="/infomation"
+            />
+            <HomeNavigateItem
+              background={`linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%), url(${contactBg}) center center / cover no-repeat`}
+              title={t("homePage.contactTitle")}
+              description={t("homePage.contactDecribe")}
+              link="/infomation"
+            />
+          </Row>
+        </NavigationTab>
+      </Col>
 
-        {/* <div className="flex gap-2 absolute bottom-2 right-2 items-center h-52">
-          <div
-            onClick={() => {
-              setExpanCalendar(!expandCalendar);
-            }}
-            className="text-gray-600  border-gray-400 bg-white rounded-full border p-3 -mr-16 flex gap-8 cursor-pointer"
-          >
-            <FaCalendar size={16} />
-            qq
-          </div>
-          <Schedule
-            className={`${
-              expandCalendar ? "expand " : ""
-            }flex gap-2 bottom-2 right-2 items-center h-52`}
-          >
-            <div
-              className="w-48 h-full text-gray-700 p-2 flex-col flex bg-white"
-              style={{
-                boxShadow:
-                  "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px,rgba(0, 0, 0, 0.23) 0px -2px 4px",
-              }}
-            >
-              <p className="text-center text-xs flex items-center gap-2">
-                <FaPersonDigging /> Lịch làm việc
-              </p>
-              <p className="text-center italic mt-1">
-                {value?.toLocaleString().split(",")[0]}
-              </p>
-              <div className="flex-1 overflow-auto mt-1">
-                <div className=" pl-1">1. Đi nhậu bá cháy</div>
-                <div className=" pl-1">2. Đi bay cháy phố</div>
-                <div className=" pl-1">3. Đi bộ một vòng</div>
-                <div className=" pl-1">4. Đi phòng nhà nghỉ</div>
-                <div className=" pl-1">5. Đi thi hoa hậu</div>
-                <div className=" pl-1">6. Đi show tập kĩ</div>
-                <div className=" pl-1">7. Đi Mỹ đấm nhau</div>
-                <div className=" pl-1">8. Đi sau người mẫu</div>
-                <div className=" pl-1">9. Đi chầu hát đồng</div>
-                <div className=" pl-1">10. Đi sông Tô Lịch</div>
-                <div className=" pl-1">11. Đi ch... à mà thôi</div>
-              </div>
-
-              <div>
-                <p></p>
-              </div>
-            </div>
-            <StyledCalendar onChange={onChange} showWeekNumbers value={value} />
-          </Schedule>
-        </div> */}
-      </div>
       {showNews && (
         <News span={5}>
           <p className="text-center font-semibold text-lg my-2 italic text-green-600">
@@ -298,7 +558,7 @@ export default function Home(props: ITestProps) {
         onClick={() => setShowNews(!showNews)}
         type="primary"
         icon={<PiNewspaperClippingBold />}
-      ></FloatButton>
+      ></FloatButton> */}
     </Wrapper>
   );
 }

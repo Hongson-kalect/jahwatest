@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  display: inline-block;
+  /* display: inline-block; */
+  padding: 0px 8px;
   position: relative;
-  width: 30%;
 
   & input[type="text"] {
     width: 100%;
-    padding: 4px 20px;
+    padding: 2px 20px;
     border: none;
     outline: none;
     border-radius: 20px;
@@ -23,7 +23,7 @@ const Wrapper = styled.div`
     border: none;
     color: #fff;
     cursor: pointer;
-    padding: 5px 20px;
+    padding: 3px 12px;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: absolute;

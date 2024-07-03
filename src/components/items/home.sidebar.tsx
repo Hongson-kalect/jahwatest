@@ -1,6 +1,7 @@
 import React from "react";
 import { FaAngleRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useAppStore } from "src/store/app";
 import styled from "styled-components";
 
 type ItemProps = {
@@ -68,11 +69,11 @@ const MainMenu = styled.div`
   line-height: 16px;
   font-size: 14px;
   padding: 8px 4px 8px 8px;
-  color: #c8c8c8;
+  color: #484848;
   transition: all 0.3s linear;
 
   &:hover {
-    color: white;
+    color: #5f5f5f;
     background-color: #c7dbff67;
   }
 `;
@@ -86,7 +87,7 @@ const SubMenuWrapper = styled.div`
 const SubMenu = styled.div`
   align-items: center;
   display: flex;
-  color: #c0c0c0;
+  color: #6a6a6a;
   padding: 2px 8px 2px 20px;
   margin: 0 0 0px 0px;
   font-size: 12px;
@@ -109,6 +110,7 @@ const SubMenu = styled.div`
 
 export const MenuItem = (props: ItemProps) => {
   const navigate = useNavigate();
+  const { setShowMobileMenu } = useAppStore();
   const active = React.useMemo(() => {
     return (
       props.link === window.location.pathname.slice(0, props?.link?.length || 0)
@@ -116,12 +118,30 @@ export const MenuItem = (props: ItemProps) => {
   }, [window.location.pathname]);
   const [showChild, setShowChild] = React.useState(active);
 
+  const handleNavigate = (link?: string) => {
+    const sideBar = document.getElementsByClassName("mobile-sidebar")[0];
+    console.log("sidebar", sideBar);
+    if (sideBar) {
+      setTimeout(() => {
+        setShowMobileMenu(false);
+      }, 300);
+      sideBar.classList.add("remove");
+    }
+
+    if (link) {
+      navigate(link);
+    }
+  };
+
   React.useEffect(() => {
     if (active) setShowChild(true);
   }, [active]);
+
   return (
-    <ItemWrapper className={`${props.className} ${active ? "active " : ""}`}>
-      <MainMenu onClick={() => props.link && navigate(props.link)}>
+    <ItemWrapper
+      className={`${props?.className || ""} ${active ? "active " : ""}`}
+    >
+      <MainMenu onClick={() => handleNavigate(props.link)}>
         <div className="icon mr-2">
           {active ? props.activeIcon || props.icon : props.icon}
         </div>
@@ -149,7 +169,7 @@ export const MenuItem = (props: ItemProps) => {
               <SubMenu
                 key={index}
                 className={`${active ? "active " : ""}`}
-                onClick={() => item.link && navigate(item.link)}
+                onClick={() => handleNavigate(item.link)}
               >
                 <div className="mr-2">
                   {active ? item.activeIcon || item.icon : item.icon}

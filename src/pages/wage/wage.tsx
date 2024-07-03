@@ -7,13 +7,11 @@ import { numberToCurrency } from "src/utils/utils";
 import styled from "styled-components";
 import jahwaSign from "src/assets/image/jahwa-sign.png";
 import { usePDF } from "react-to-pdf";
-import { Page } from "@react-pdf/renderer";
-import ReactPDF from "@react-pdf/renderer";
 import { BsDownload } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
 
 export interface IWagePageProps {}
-const Wrapper = styled(Page)`
+const Wrapper = styled.div`
   /* flex: 1; */
   overflow: auto;
   display: flex;
@@ -288,7 +286,7 @@ export default function WagePage(props: IWagePageProps) {
   };
   return (
     <>
-      <Wrapper size={"A4"} ref={targetRef} style={{ width: "760px" }}>
+      <Wrapper ref={targetRef} style={{ width: "760px" }}>
         <p className="title flex gap-2 justify-center items-center">
           2024-06 - {t("wage.title")}
           {downloadShow && (
