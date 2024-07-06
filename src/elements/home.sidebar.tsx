@@ -1,30 +1,15 @@
 import * as React from "react";
 import { MenuItem } from "src/components/items/home.sidebar";
 import styled from "styled-components";
-import { Avatar, Button, Col, Menu, MenuProps, Row, Select } from "antd";
-import { AiFillHome, AiOutlineBell, AiOutlineMail } from "react-icons/ai";
-import { LuAppWindow, LuUser2 } from "react-icons/lu";
-import { FiSettings } from "react-icons/fi";
-import {
-  FaAngleRight,
-  FaMoneyBillAlt,
-  FaRegMoneyBillAlt,
-} from "react-icons/fa";
+import { Avatar, Button, Col, MenuProps, Row } from "antd";
 
 import summerLogo from "src/assets/image/summer.jfif";
-import { FaRegUser, FaUser, FaUserLarge } from "react-icons/fa6";
-import {
-  IoIosNotifications,
-  IoIosNotificationsOutline,
-  IoMdMail,
-} from "react-icons/io";
+import { FaRegUser, FaUser } from "react-icons/fa6";
 import {
   IoHomeOutline,
   IoLogOutOutline,
   IoNewspaperOutline,
   IoNewspaperSharp,
-  IoSettingsOutline,
-  IoSettingsSharp,
 } from "react-icons/io5";
 import {
   RiHome2Fill,
@@ -32,9 +17,8 @@ import {
   RiMoneyDollarCircleFill,
   RiMoneyDollarCircleLine,
 } from "react-icons/ri";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CgUserlane } from "react-icons/cg";
-import { CiMail } from "react-icons/ci";
 import { useTranslation } from "react-i18next";
 import { DefaultOptionType } from "antd/es/select";
 
@@ -42,7 +26,6 @@ import vnFlag from "src/assets/image/vn-flag.jfif";
 import krFlag from "src/assets/image/kr-flag.png";
 import cnFlag from "src/assets/image/cn-flag.png";
 import enFlag from "src/assets/image/en-flag.png";
-import { BiLogOutCircle } from "react-icons/bi";
 
 export interface IHomeSideBarProps {}
 
@@ -132,9 +115,8 @@ const languages: DefaultOptionType[] = [
   },
 ];
 
-export default function HomeSideBar(props: IHomeSideBarProps) {
+export default function HomeSideBar() {
   const navigate = useNavigate();
-  const [isHover, setIsHover] = React.useState(false);
   const { t, i18n } = useTranslation();
 
   const [language, setLanguage] = React.useState(() => {

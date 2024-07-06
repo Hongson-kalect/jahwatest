@@ -69,7 +69,7 @@ const SideBarWrap = styled.div`
   width: 75vw;
 
   &.float-in {
-    animation: floatIn 0.15s ease-out forwards;
+    animation: floatIn 0.15s linear forwards;
   }
 
   &.remove {
@@ -77,7 +77,7 @@ const SideBarWrap = styled.div`
   }
   @-webkit-keyframes floatIn {
     0% {
-      margin-left: -65vw;
+      margin-left: -75vw;
     }
     100% {
       margin-left: 0;
@@ -94,7 +94,7 @@ const SideBarWrap = styled.div`
   }
 `;
 
-const MobileNav = ({ close }: { close: () => void }) => {
+export const MobileNav = ({ close }: { close: () => void }) => {
   const [closing, setClosing] = React.useState(false);
   const ref = React.useRef<HTMLDivElement | null>(null);
 

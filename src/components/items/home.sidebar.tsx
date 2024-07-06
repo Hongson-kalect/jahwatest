@@ -1,6 +1,6 @@
 import React from "react";
 import { FaAngleRight } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import useCustomNaviage from "src/hooks/useCustomNavigate";
 import { useAppStore } from "src/store/app";
 import styled from "styled-components";
 
@@ -32,25 +32,26 @@ const ItemWrapper = styled.div`
     & > div:first-child {
       padding-left: 16px;
       color: white;
-      background-color: #0077ff;
+      background-color: #3b97ff;
     }
 
     & > div:nth-child(2) {
       border-bottom-right-radius: 12px;
       border-bottom-left-radius: 12px;
       margin: 0 0 4px 8px;
-      background-color: #9879e2;
+      background-color: #af97e8;
       & > div {
-        color: white !important;
+        color: #d5d5d5;
         transition: all 0.3s linear;
 
         &.active {
           padding-left: 26px;
-          background-color: #7f60c6 !important;
+          background-color: #a182e8 !important;
+          color: white !important;
         }
 
         &:hover {
-          background-color: #a792d7;
+          background-color: #b3a0e0;
         }
       }
     }
@@ -109,7 +110,8 @@ const SubMenu = styled.div`
 `;
 
 export const MenuItem = (props: ItemProps) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const navigate = useCustomNaviage();
   const { setShowMobileMenu } = useAppStore();
   const active = React.useMemo(() => {
     return (
@@ -129,6 +131,7 @@ export const MenuItem = (props: ItemProps) => {
     }
 
     if (link) {
+      console.log("link", link);
       navigate(link);
     }
   };

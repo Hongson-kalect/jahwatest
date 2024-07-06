@@ -1,14 +1,16 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import MainLayout from "src/layouts/main.layout";
+import MobileLayout from "src/layouts/mobile/m.main.layout";
 import LoginPage from "src/pages/auth/login/login.page";
 import BusinessPage from "src/pages/business";
 import DayOffPage from "src/pages/day-off";
 import Home1 from "src/pages/home/home.home1";
 import Home2 from "src/pages/home/home.home2";
 import Home from "src/pages/home/home.page";
+import MobileHome from "src/pages/home/mobile.home";
 import MailPage from "src/pages/mail";
+import MobileDayOff from "src/pages/mobile/dayOff/m.dayoff";
+import MobileWage from "src/pages/mobile/wage/m.wage";
 import NotificationPage from "src/pages/notification/notify.page";
 import NotificationPage1 from "src/pages/notification/notify.page1";
 import NotificationPage2 from "src/pages/notification/notify.page2";
@@ -26,6 +28,32 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/m",
+    element: (
+      <MobileLayout>
+        <Outlet />
+      </MobileLayout>
+    ),
+    children: [
+      {
+        path: "/m",
+        element: <MobileHome />,
+      },
+      {
+        path: "/m/home",
+        element: <MobileHome />,
+      },
+      {
+        path: "/m/wage",
+        element: <MobileWage />,
+      },
+      {
+        path: "/m/day-off",
+        element: <MobileDayOff />,
+      },
+    ],
   },
   {
     path: "/",

@@ -1,23 +1,11 @@
-import { Button, Col, DatePicker, Empty, FloatButton, Row, Select } from "antd";
+import { Button, Col, Row, Select, Table } from "antd";
 import * as React from "react";
-import MainLayout from "src/layouts/main.layout";
-import styled, { keyframes } from "styled-components";
-import HomeNewItem from "./components/home.new.item";
-import { RadioGroup } from "./components/radioGroup";
 import Calendar from "react-calendar";
-import { FaPersonDigging } from "react-icons/fa6";
-import { FaCalendar, FaInfoCircle } from "react-icons/fa";
-import homeImage from "src/assets/image/doanhnhan.png";
-import homeImageBg from "src/assets/image/qqq.png";
-import HomeNavigateItem from "./components/home.navigate.item";
+import { FaCalendar, FaCoffee, FaInfoCircle } from "react-icons/fa";
+import styled from "styled-components";
 
-import moneyBg from "src/assets/image/money-bg.jpg";
-import workerBg from "src/assets/image/worker.jfif";
-import relaxBg from "src/assets/image/relax.jfif";
-import mirrorBg from "src/assets/image/mirror.webp";
-import letterBg from "src/assets/image/letterBG.png";
-import contactBg from "src/assets/image/contactBg.jfif";
-import { PiNewspaperClippingBold } from "react-icons/pi";
+import Column from "antd/es/table/Column";
+import ColumnGroup from "antd/es/table/ColumnGroup";
 import { useTranslation } from "react-i18next";
 import { MdOutlineBarChart, MdOutlineContentPasteSearch } from "react-icons/md";
 
@@ -118,18 +106,6 @@ const MainContent = styled.div`
   height: 100%;
 `;
 
-type ValuePiece = Date | null;
-
-type Value = ValuePiece | [ValuePiece, ValuePiece];
-
-const Schedule = styled.div``;
-
-const NavigationTab = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-`;
-
 const StyledTable = styled.table`
   padding: 2px 40px;
   border-radius: 12px;
@@ -171,6 +147,14 @@ const StyledTable = styled.table`
   }
 `;
 
+const Schedule = styled.div``;
+
+const NavigationTab = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
 const DayDetailTable = styled.table`
   td {
     color: #333;
@@ -194,16 +178,101 @@ const UnderLineSelect = styled(Select)`
   /* outline: none !important; */
 `;
 
-export default function Home(props: ITestProps) {
+const DayOffTable = styled(Table)`
+  border: 1px solid #aaa;
+  /* border-radius */
+  th {
+    font-size: 12px;
+    background: #00aaff !important;
+    color: white !important;
+    border-radius: 0 !important;
+    padding: 4px !important;
+    text-align: center;
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    &:first-child {
+      border-left: none;
+    }
+  }
+  td {
+    border-left: 0.1px solid gray;
+    padding: 1px 8px !important;
+    font-size: 14px;
+
+    &:first-child {
+      border: none;
+    }
+  }
+  tr:first-child td {
+    border-top: 1px solid gray;
+  }
+
+  .ant-table-footer {
+    padding: 4px 8px;
+  }
+
+  .ant-table,
+  .ant-spin-nested-loading,
+  .ant-spin-container {
+    height: 100%;
+  }
+
+  .ant-table {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+`;
+type ValuePiece = Date | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
+export default function Home() {
   const [value, onChange] = React.useState<Value>(new Date());
-  const [expandCalendar, setExpanCalendar] = React.useState(false);
-  const [showNews, setShowNews] = React.useState(false);
 
   const { t, i18n } = useTranslation();
 
   return (
-    <Wrapper className="bg-gray-200  overflow-auto">
-      <Col className="px-2 h-44">
+    <Wrapper
+      className="bg-gray-200  overflow-auto flex-nowrap"
+      // gutter={[0, 10]}
+    >
+      <Col>
+        <div className="wrapper p-2 mt-3">
+          <div className="flex flex-col relative bg-white">
+            <div className="flex justify-center items-center text-gray-400  gap-2 absolute -top-4 right-2 bg-transparent">
+              <FaCoffee size={14} />
+              <p className="text-center text-xs font-bold italic">Phép năm</p>
+            </div>
+
+            <div className="mt-2 px-2 py-1 bg-white">
+              <DayOffTable
+                className="text-center"
+                pagination={false}
+                dataSource={[
+                  { previos: 0, current: 5, xray: 0, used: 5, left: 1 },
+                ]}
+              >
+                <ColumnGroup title={<p>{t("wage.dayOffStatus")}</p>}>
+                  <Column
+                    title={t("wage.lastYear")}
+                    dataIndex="previos"
+                    key="previos"
+                  />
+                  <Column
+                    title={t("wage.thisYear")}
+                    dataIndex="current"
+                    key="current"
+                  />
+                  <Column title={t("wage.X-RAY")} dataIndex="xray" key="xray" />
+                  <Column title={t("wage.used")} dataIndex="used" key="used" />
+                  <Column title={t("wage.left")} dataIndex="left" key="left" />
+                </ColumnGroup>
+              </DayOffTable>
+            </div>
+          </div>
+        </div>
         <div className="wrapper pt-5">
           <div className=" bg-white relative p-2">
             <div className="flex justify-center items-center text-gray-400  gap-2 absolute -top-4 right-2 bg-transparent">
@@ -254,8 +323,237 @@ export default function Home(props: ITestProps) {
             </StyledTable>
           </div>
         </div>
+
+        <div className="wrapper p-2 mt-5">
+          <div className="flex flex-col relative bg-white">
+            <div className="flex justify-center items-center text-gray-400  gap-2 absolute -top-4 right-2 bg-transparent">
+              <FaInfoCircle size={14} />
+              <p className="text-center text-xs font-bold italic">
+                Chi tiết lịch làm việc
+              </p>
+            </div>
+
+            <div className="flex justify-end items-center text-indigo-600  gap-2 mt-2 mr-2">
+              <UnderLineSelect
+                size="small"
+                className="w-1/3 "
+                options={[{ label: "4/2024", value: "4/2024" }]}
+                suffixIcon={<FaCalendar />}
+              />
+              <Button
+                size="small"
+                type="primary"
+                icon={<MdOutlineContentPasteSearch />}
+              >
+                Tra cứu
+              </Button>
+            </div>
+            <div className="px-2 py-1 flex items-center">
+              <StyledCalendar
+                showNeighboringMonth={false}
+                // calendarType="islamic"
+                tileContent={({ date, view }) => {
+                  const day = date.getDate();
+                  return (
+                    <div className="flex justify-center">
+                      <div
+                        className={`h-1 w-5/6 flex bg-green-400 ${
+                          day > 15 ? "shadow-black r" : "shadow-white"
+                        } shadow`}
+                      >
+                        {date.getDate() === 1 && (
+                          <>
+                            <div className="bg-cyan-600 flex-1 h-full"></div>
+                            <div className="bg-red-600 flex-1 h-full"></div>
+                            <div className="bg-orange-500 flex-1 h-full"></div>
+                            <div className="bg-pink-500 flex-1 h-full"></div>
+                            <div className="bg-gray-500 flex-1 h-full"></div>
+                          </>
+                        )}
+                        {date.getDate() === 2 && (
+                          <div className="bg-red-600 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 3 && (
+                          <div className="bg-orange-500 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 4 && (
+                          <div className="bg-pink-500 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 5 && (
+                          <div className="bg-gray-500 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 6 && (
+                          <div
+                            className="bg-gradient-to-r from-green-400 to-black flex-1 h-full"
+                            style={{ fontSize: "20px" }}
+                          ></div>
+                        )}
+                        {date.getDate() === 7 && (
+                          <div className="bg-red-600 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 8 && (
+                          <div className="bg-cyan-600 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 9 && (
+                          <div className="bg-cyan-600 flex-1 h-full"></div>
+                        )}
+                        {date.getDate() === 18 && (
+                          <>
+                            <div className="bg-cyan-600 flex-1 h-full"></div>
+                            <div className="bg-red-600 flex-1 h-full"></div>
+                            <div className="bg-orange-500 flex-1 h-full"></div>
+                            <div className="bg-pink-500 flex-1 h-full"></div>
+                            <div className="bg-gray-500 flex-1 h-full"></div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  );
+                }}
+                onChange={onChange}
+                showNavigation={false}
+                showWeekNumbers={false}
+                value={value}
+              />
+
+              <div className="w-1/4 flex flex-col items-center justify-center">
+                <p
+                  style={{ fontSize: "10px" }}
+                  className="mb-1 underline italic"
+                >
+                  Chú thích
+                </p>
+                <div className="bg-green-400 h-1 w-4"></div>
+                <p style={{ fontSize: "10px" }} className="mb-1 text-green-400">
+                  Thường
+                </p>
+                <div className="bg-cyan-600 h-1 w-4"></div>
+                <p style={{ fontSize: "10px" }} className="mb-1 text-cyan-600">
+                  Tăng ca
+                </p>
+                <div className="bg-red-600 h-1 w-4"></div>
+                <p style={{ fontSize: "10px" }} className="mb-1 text-red-600">
+                  Nghỉ KP
+                </p>
+                <div className="bg-orange-500 h-1 w-4"></div>
+                <p
+                  style={{ fontSize: "10px" }}
+                  className="mb-1 text-orange-500"
+                >
+                  Nghỉ P
+                </p>
+                <div className="bg-pink-500 h-1 w-4"></div>
+                <p style={{ fontSize: "10px" }} className="mb-1 text-pink-500">
+                  Đi muộn
+                </p>
+                <div className="bg-purple-500 h-1 w-4"></div>
+                <p
+                  style={{ fontSize: "10px" }}
+                  className="mb-1 text-purple-500"
+                >
+                  Về sớm
+                </p>
+
+                <div className="shadow shadow-black h-0.5 bg-transparent w-4"></div>
+                <p style={{ fontSize: "10px" }} className="text-xs">
+                  Ca đêm
+                </p>
+              </div>
+            </div>
+            <div className="px-2 py-1 flex-1 mt-2">
+              <div className="border px-2 py-1">
+                <p className="underline text-gray-500 text-xs">
+                  Chi tiết ngày:
+                </p>
+
+                <div className="px-1">
+                  <DayDetailTable>
+                    <tbody>
+                      <tr>
+                        <td>Chấm công:</td>
+                        <td>8:14:16</td>
+                      </tr>
+                      <tr>
+                        <td>Tan làm:</td>
+                        <td>17:51:14</td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </DayDetailTable>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </Col>
-      <Col style={{ height: "calc(100% - 212px)" }} className="mt-5">
+      {/* <Col className="px-2">
+        <div className="wrapper pt-5">
+          <div className=" bg-white relative p-2">
+            <div className="flex justify-center items-center text-gray-400  gap-2 absolute -top-4 right-2 bg-transparent">
+              <MdOutlineBarChart size={14} />
+              <p className="text-center text-xs font-bold italic">
+                Thống kê tháng này
+              </p>
+            </div>
+            <StyledTable>
+              <tbody className="border">
+                <tr>
+                  <td>Tiêu chí</td>
+                  <td>Ngày</td>
+                  <td>Tiêu chí</td>
+                  <td>Giờ</td>
+                </tr>
+                <tr>
+                  <td>Làm ngày</td>
+                  <td>14.5</td>
+                  <td>T/C ngày</td>
+                  <td>14.5</td>
+                </tr>
+                <tr>
+                  <td>Làm đêm</td>
+                  <td>14.5</td>
+                  <td>T/C đêm</td>
+                  <td>14.5</td>
+                </tr>
+                <tr>
+                  <td>Chủ nhật</td>
+                  <td>14.5</td>
+                  <td>T/C Chủ nhật</td>
+                  <td>14.5</td>
+                </tr>
+                <tr>
+                  <td>Ngày lễ</td>
+                  <td>14.5</td>
+                  <td>T/C Ngày lễ</td>
+                  <td>14.5</td>
+                </tr>
+                <tr>
+                  <td>Đi muộn (phút/lần)</td>
+                  <td>42/2</td>
+                  <td>Về sớm (phút/lần)</td>
+                  <td>42/2</td>
+                </tr>
+              </tbody>
+            </StyledTable>
+          </div>
+        </div>
+      </Col> */}
+      {/* <Col className="mt-5">
         <div className="wrapper p-2">
           <div className="flex flex-col relative bg-white">
             <div className="flex justify-center items-center text-gray-400  gap-2 absolute -top-4 right-2 bg-transparent">
@@ -401,7 +699,7 @@ export default function Home(props: ITestProps) {
                 <div className="px-1">
                   {/* <Empty /> */}
 
-                  <DayDetailTable>
+      {/* <DayDetailTable>
                     <tbody>
                       <tr>
                         <td>Chấm công:</td>
@@ -434,8 +732,43 @@ export default function Home(props: ITestProps) {
             </div>
           </div>
         </div>
-      </Col>
+      </Col> */}
+      {/* <Col className="mt-0">
+        <div className="wrapper p-2">
+          <div className="flex flex-col relative bg-white">
+            <div className="flex justify-center items-center text-gray-400  gap-2 absolute -top-4 right-2 bg-transparent">
+              <FaInfoCircle size={14} />
+              <p className="text-center text-xs font-bold italic">Phép năm</p>
+            </div>
 
+            <div className="mt-5 px-2 py-1 bg-white">
+              <DayOffTable
+                className="text-center"
+                pagination={false}
+                dataSource={[
+                  { previos: 0, current: 5, xray: 0, used: 5, left: 1 },
+                ]}
+              >
+                <ColumnGroup title={<p>{t("wage.dayOffStatus")}</p>}>
+                  <Column
+                    title={t("wage.lastYear")}
+                    dataIndex="previos"
+                    key="previos"
+                  />
+                  <Column
+                    title={t("wage.thisYear")}
+                    dataIndex="current"
+                    key="current"
+                  />
+                  <Column title={t("wage.X-RAY")} dataIndex="xray" key="xray" />
+                  <Column title={t("wage.used")} dataIndex="used" key="used" />
+                  <Column title={t("wage.left")} dataIndex="left" key="left" />
+                </ColumnGroup>
+              </DayOffTable>
+            </div>
+          </div>
+        </div>
+      </Col> */}
       {/* <Col xs={0} lg={24} className="flex-1">
         <Row
           className="flex justify-between h-full relative"

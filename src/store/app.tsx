@@ -6,6 +6,7 @@ type appProps = {
 };
 
 export const useAppStore = create<appProps>((set) => ({
-  showMobileMenu: true,
-  setShowMobileMenu: (val) => set((state) => ({ showMobileMenu: val })),
+  showMobileMenu: false,
+  setShowMobileMenu: (val) => set(() => ({ showMobileMenu: val })),
+  // setShowMobileMenu: (val) => set((state) => ({ showMobileMenu: val })),
 }));

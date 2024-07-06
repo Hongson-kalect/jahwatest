@@ -400,8 +400,6 @@ export default function WagePage(props: IWagePageProps) {
                 dataIndex="amount"
                 key="amount"
               />
-              {/* <Column title="Giờ" dataIndex="hour" key="hour" />
-            <Column title="Phút" dataIndex="munite" key="munite" /> */}
             </ColumnGroup>
           </StyledTable>
         </div>
