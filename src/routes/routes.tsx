@@ -10,6 +10,7 @@ import Home from "src/pages/home/home.page";
 import MobileHome from "src/pages/home/mobile.home";
 import MailPage from "src/pages/mail";
 import MobileDayOff from "src/pages/mobile/dayOff/m.dayoff";
+import MobileProfilePage from "src/pages/mobile/profile/m.profile";
 import MobileWage from "src/pages/mobile/wage/m.wage";
 import NotificationPage from "src/pages/notification/notify.page";
 import NotificationPage1 from "src/pages/notification/notify.page1";
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
       {
         path: "/m/day-off",
         element: <MobileDayOff />,
+      },
+      {
+        path: "/m/profile",
+        element: <MobileProfilePage />,
       },
     ],
   },
