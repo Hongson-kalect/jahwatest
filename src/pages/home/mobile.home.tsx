@@ -20,11 +20,86 @@ import {
 import { SiGooglemaps } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
 import HomeSideBar from "src/elements/home.sidebar";
+import useCustomNaviage from "src/hooks/useCustomNavigate";
 import { MobileNav } from "src/layouts/main.layout";
 import { useAppStore } from "src/store/app";
 import styled from "styled-components";
+import { UnderLineSelect } from "./home.page";
+
+import vnFlag from "src/assets/image/vn-flag.jfif";
+import krFlag from "src/assets/image/kr-flag.png";
+import cnFlag from "src/assets/image/cn-flag.png";
+import enFlag from "src/assets/image/en-flag.png";
+import { useTranslation } from "react-i18next";
 
 export interface IMobileHomeProps {}
+
+const languages: DefaultOptionType[] = [
+  {
+    value: "vi",
+    label: (
+      <div className="flex gap-1 items-center justify-between">
+        <div
+          className="h-4 w-6"
+          style={{
+            background: `url(${vnFlag}) center center /contain no-repeat`,
+          }}
+        ></div>
+        <p className="font-semibold" style={{ fontSize: "12px" }}>
+          VN
+        </p>
+      </div>
+    ),
+  },
+  {
+    value: "kr",
+    label: (
+      <div className="flex gap-1 items-center justify-between">
+        <div
+          className="h-4 w-6"
+          style={{
+            background: `url(${krFlag}) center center /contain no-repeat`,
+          }}
+        ></div>
+        <p className="font-semibold" style={{ fontSize: "12px" }}>
+          KR
+        </p>
+      </div>
+    ),
+  },
+  {
+    value: "cn",
+    label: (
+      <div className="flex gap-1 items-center justify-between">
+        <div
+          className="h-4 w-6"
+          style={{
+            background: `url(${cnFlag}) center center /contain no-repeat`,
+          }}
+        ></div>
+        <p className="font-semibold" style={{ fontSize: "12px" }}>
+          CN
+        </p>
+      </div>
+    ),
+  },
+  {
+    value: "en",
+    label: (
+      <div className="flex gap-1 items-center justify-between">
+        <div
+          className="h-4 w-6"
+          style={{
+            background: `url(${enFlag}) center center /contain no-repeat`,
+          }}
+        ></div>
+        <p className="font-semibold" style={{ fontSize: "12px" }}>
+          EN
+        </p>
+      </div>
+    ),
+  },
+];
 
 const Wrapper = styled.div`
   /* display: flex; */
@@ -96,13 +171,13 @@ const menuLList = [
   {
     // title: "L/S Chấm công",
     title: "C/V Hiện tại",
-    link: "/profile",
+    link: "/m/work",
     icon: <FaCalendarCheck />,
     type: "personal",
   },
   {
     title: "Thông báo",
-    link: "/profile",
+    link: "/notification",
     icon: <MdOutlineNewspaper />,
     type: "personal",
   },
@@ -172,6 +247,17 @@ export default function MobileHome(props: IMobileHomeProps) {
   const [activeTab, setActiveTab] = React.useState<"personal" | "work">(
     "personal"
   );
+  const [language, setLanguage] = React.useState(
+    localStorage.getItem("language") || "vi"
+  );
+
+  const { t, i18n } = useTranslation();
+  console.log(language);
+
+  React.useEffect(() => {
+    localStorage.setItem("language", language || "vi");
+    // i18n.changeLanguage(language || "vi");
+  }, [language]);
   return (
     <Wrapper>
       <Header className="header">
@@ -179,7 +265,12 @@ export default function MobileHome(props: IMobileHomeProps) {
           <div className="title text-white text-2xl">JAHWA NƯƠNG</div>
           <div className="options flex gap-4">
             <div>
-              <IoNotificationsSharp color="white" size={28} />
+              <UnderLineSelect
+                value={language}
+                className="w-20"
+                options={languages}
+                onChange={(e) => setLanguage(e)}
+              />
             </div>
             <div>
               <IoNotificationsSharp color="white" size={28} />
@@ -273,7 +364,7 @@ type ItemProps = {
 };
 
 function TabMenu(props: ItemProps) {
-  const navigate = useNavigate();
+  const navigate = useCustomNaviage();
 
   const handleNavigate = () => {
     navigate(props.link);
