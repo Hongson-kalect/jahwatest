@@ -167,7 +167,7 @@ const DayDetailTable = styled.table`
   }
 `;
 
-const UnderLineSelect = styled(Select)`
+export const UnderLineSelect = styled(Select)`
   & .ant-select-selector {
     border: none !important;
     box-shadow: none !important;

@@ -300,7 +300,6 @@ export default function MobileWage(props: IMobileWageProps) {
           <Row className="w-full">
             <Col span={24}>
               <p className="italic text-blue-600">Chi tiết chi trả:</p>
-
               <Row className="shadow-inner shadow-blue-800 ml-1 rounded-lg bg-white">
                 <Col span={12} className="px-2 py-1">
                   <div className="text-sm text-transparent bg-gradient-to-r from-black to-purple-500 bg-clip-text font-bold">

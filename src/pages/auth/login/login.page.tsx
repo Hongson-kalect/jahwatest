@@ -14,7 +14,7 @@ export interface ILoginPageProps {}
 
 const Wrapper = styled(Row)`
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
