@@ -1,15 +1,26 @@
 {
-  "common": {},
-  "header": {},
-  "sideBar": {
-    "home": "홈페이지",
-    "wage": "급여 현황",
-    "business": "사업",
-    "dayOff": "휴가 정보",
-    "profile": "개인 정보",
-    "mail": "메일",
-    "setting": "설정"
+  "common": {
+    "personal": "개인",
+    "work": "직장"
   },
+  "header": {},
+  "sidebar": {
+    "home": "홈",
+    "wage": "급여 현황",
+    "dayOff": "휴가 정보",
+    "progress": "진행 상황",
+    "notification": "알림",
+    "seft": "자신",
+    "mail": "메일",
+    "approval": "승인",
+    "plan": "달성 계획",
+    "humanMNG": "인력 관리",
+    "suplierMNG": "공급자 관리",
+    "distributionMNG": "분배 관리",
+    "report": "보고서",
+    "jahwaVN": "Jahwa VN"
+  },
+
   "loginPage": {
     "welcome": "환영합니다",
     "username": "계정 이름",
@@ -37,6 +48,64 @@
     "contactTitle": "개발자에게 문의",
     "contactDecribe": "개발자에게 메세지 남기기"
   },
+
+  "dayOff": {
+    "title": "휴가",
+    "lastYear": "작년",
+    "thisYear": "올해",
+    "used": "사용됨",
+    "left": "남은 휴가",
+    "history": "휴가 기록",
+    "date": "날짜",
+    "type": "유형",
+    "reason": "사유"
+  },
+
+  "work": {
+    "salaryRank": "급여 등급",
+    "position": "직위",
+    "location": "위치",
+    "title": "성과",
+    "detail": "성과 상세",
+    "day": "근무일",
+    "dayOT": "근무일 초과근로",
+    "night": "야근",
+    "nightOT": "야근 초과근로",
+    "sunday": "주말",
+    "sundayOT": "주말 초과근로",
+    "fes": "휴일",
+    "fesOT": "휴일 초과근로",
+    "calendar": "자세한 일정",
+    "note": "메모",
+    "search": "검색",
+    "normal": "정상",
+    "overtime": "초과근로",
+    "offNoP": "휴가 (승인 없음)",
+    "offP": "휴가 (승인)",
+    "offhalf": "반일 휴가",
+    "comeLate": "늦귀",
+    "leaveSoon": "일찍 떠난 사람",
+    "nightShift": "야근 배치",
+    "dayDetail": "일일 상세",
+    "start": "시작",
+    "finish": "종료",
+    "otTime": "초과근로시간",
+    "shift": "배치"
+  },
+
+  "selfNotify": {
+    "title": "알림",
+    "socialNews": "사회 뉴스",
+    "companyNews": "내부 뉴스",
+    "temporaryNews": "임시 뉴스",
+    "pictureNews": "이미지 콘텐츠",
+    "all": "전체",
+    "social": "사회",
+    "company": "내부",
+    "temporary": "임시",
+    "picture": "이미지"
+  },
+
   "profile": {
     "seft": {
       "name": "이름",

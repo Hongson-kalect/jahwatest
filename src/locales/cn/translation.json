@@ -1,25 +1,37 @@
 {
-  "common": {},
-  "header": {},
-  "sideBar": {
-    "home": "首页",
-    "wage": "薪资",
-    "business": "工作",
-    "dayOff": "休假",
-    "profile": "个人信息",
-    "mail": "邮件",
-    "setting": "设置"
+  "common": {
+    "personal": "个人",
+    "work": "工作"
   },
+  "header": {},
+  "sidebar": {
+    "home": "首页",
+    "wage": "工资状况",
+    "dayOff": "休假信息",
+    "progress": "进度",
+    "notification": "通知",
+    "seft": "自己",
+    "mail": "邮件",
+    "approval": "审批",
+    "plan": "实现计划",
+    "humanMNG": "人事管理",
+    "suplierMNG": "供应商管理",
+    "distributionMNG": "分布管理",
+    "report": "报告",
+    "jahwaVN": "Jahwa VN"
+  },
+
   "loginPage": {
-    "welcome": "欢迎光临",
+    "welcome": "欢迎",
     "username": "用户名",
     "password": "密码",
     "saveAccount": "保存账户",
     "forgotAccount": "忘记密码",
     "login": "登录",
-    "newMember": "首次登录？",
+    "newMember": "新用户？",
     "createPassword": "创建密码！"
   },
+
   "homePage": {
     "slogan-1": "更改！提升！一起发展！",
     "slogan-2": "通过提升生产力和质量来实现领导目标的完成",
@@ -37,6 +49,64 @@
     "contactTitle": "联系开发者",
     "contactDecribe": "给cu Hùng IT发消息 :V"
   },
+
+  "dayOff": {
+    "title": "休假",
+    "lastYear": "去年",
+    "thisYear": "今年",
+    "used": "已休假",
+    "left": "剩余",
+    "history": "休假历史",
+    "date": "日期",
+    "type": "类型",
+    "reason": "原因"
+  },
+
+  "work": {
+    "salaryRank": "薪水等级",
+    "position": "职位",
+    "location": "工作地点",
+    "title": "成就",
+    "detail": "成就详情",
+    "day": "工作日",
+    "dayOT": "加班日",
+    "night": "夜班",
+    "nightOT": "夜班加班",
+    "sunday": "周末",
+    "sundayOT": "周末加班",
+    "fes": "假日",
+    "fesOT": "假日加班",
+    "calendar": "详细日历",
+    "note": "备注",
+    "search": "搜索",
+    "normal": "正常",
+    "overtime": "加班",
+    "offNoP": "未取得授权",
+    "offP": "已取得授权",
+    "offhalf": "半天",
+    "comeLate": "迟到",
+    "leaveSoon": "早退",
+    "nightShift": "夜班",
+    "dayDetail": "工作日详情",
+    "start": "开始",
+    "finish": "结束",
+    "otTime": "加班时间",
+    "shift": "班次"
+  },
+
+  "selfNotify": {
+    "title": "通知",
+    "socialNews": "社交新闻",
+    "companyNews": "内部新闻",
+    "temporaryNews": "临时新闻",
+    "pictureNews": "图片新闻",
+    "all": "全部",
+    "social": "社交",
+    "company": "内部",
+    "temporary": "临时",
+    "picture": "图片"
+  },
+
   "profile": {
     "seft": {
       "name": "姓名",
