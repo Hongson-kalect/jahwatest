@@ -1,7 +1,28 @@
-import { Avatar, Col, Row } from "antd";
+import { Avatar, Col, FloatButton, Row } from "antd";
+import "./m.profile.css";
 import * as React from "react";
-import { IoNotificationsSharp } from "react-icons/io5";
+import { BiSolidReport, BiUserPin } from "react-icons/bi";
+import { FaUsersCog } from "react-icons/fa";
+import {
+  FaBars,
+  FaBuildingUser,
+  FaCalendarCheck,
+  FaCalendarXmark,
+  FaChartLine,
+  FaSackDollar,
+  FaUser,
+} from "react-icons/fa6";
+import { IoMail, IoNotificationsSharp } from "react-icons/io5";
+import {
+  MdEditDocument,
+  MdMapsHomeWork,
+  MdOutlineNewspaper,
+} from "react-icons/md";
+import { SiGooglemaps } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
+import HomeSideBar from "src/elements/home.sidebar";
+import { MobileNav } from "src/layouts/main.layout";
+import { useAppStore } from "src/store/app";
 import styled from "styled-components";
 
 export interface IMobileHomeProps {}
@@ -115,14 +136,18 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
       <Tab className="tab">
         <Col span={24}>
           <Row className="w-full">
-            <div>
+            <div className="w-full">
               {activeTab === "personal" && (
                 <div>
                   <div className="sda">
-                    <p className="font-bold text-blue-500 mb-1">
-                      Thông tin cá nhân
-                    </p>
                     <table>
+                      <tr>
+                        <td colSpan={2} className="header">
+                          <p className="font-bold text-center mb-1">
+                            Thông tin cá nhân
+                          </p>
+                        </td>
+                      </tr>
                       <tr>
                         <td>Mã nhân viên</td>
                         <td>V22406013</td>
@@ -143,8 +168,6 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
                         <td>Email cá nhân</td>
                         <td>hungchaykkk@gmail.com</td>
                       </tr>
-                    </table>
-                    <table>
                       <tr>
                         <td>Nơi sinh</td>
                         <td>Đại Đình - Tam Đảo - Vĩnh Phúc</td>
@@ -165,11 +188,11 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
                         <td>Quốc tịch</td>
                         <td>Việt Nam</td>
                       </tr>
-                    </table>
-                  </div>
-                  <div>
-                    <p className="font-bold text-blue-500 mb-1">Chi tiết</p>
-                    <table>
+                      <tr>
+                        <td colSpan={2} className="header">
+                          <p className="font-bold text-center mb-1">Chi tiết</p>
+                        </td>
+                      </tr>
                       <tr>
                         <td>Tên tiếng Hàn</td>
                         <td>nila sing a xỏong</td>
@@ -186,8 +209,6 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
                         <td>Tình trạng hôn nhân</td>
                         <td>Đã kết hôn</td>
                       </tr>
-                    </table>
-                    <table>
                       <tr>
                         <td>Trình độ Học vấn</td>
                         <td>Đại học</td>
@@ -210,10 +231,14 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
               )}
               {activeTab === "work" && (
                 <div>
-                  <p className="font-bold text-blue-500 mb-1">
-                    Thông tin cơ bản
-                  </p>
                   <table>
+                    <tr>
+                      <td colSpan={2} className="header">
+                        <p className="font-bold text-center mb-1">
+                          Thông tin cơ bản
+                        </p>
+                      </td>
+                    </tr>
                     <tr>
                       <td>Mã công ty</td>
                       <td>VN532</td>
@@ -239,8 +264,6 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
                       <td>Mã bộ phận nội bộ</td>
                       <td>15</td>
                     </tr>
-                  </table>
-                  <table>
                     <tr>
                       <td>Mã bộ phận</td>
                       <td>IT - 330700</td>
@@ -265,11 +288,13 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
                       <td>Hệ số lương</td>
                       <td>01</td>
                     </tr>
-                  </table>
-                  <p className="font-bold text-blue-500 mb-1">
-                    Thông tin cơ bản
-                  </p>
-                  <table>
+                    <tr>
+                      <td colSpan={2} className="header">
+                        <p className="font-bold text-center mb-1">
+                          Thông tin cơ bản
+                        </p>
+                      </td>
+                    </tr>
                     <tr>
                       <td>Ngày vào tập đoàn</td>
                       <td>2024-06-10</td>
@@ -286,8 +311,6 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
                       <td>Ngày biến động nhân sự</td>
                       <td>2024-06-10</td>
                     </tr>
-                  </table>
-                  <table>
                     <tr>
                       <td>Xác nhận kinh nghiệm</td>
                       <td>2</td>
@@ -309,8 +332,14 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
               )}
               {activeTab === "info" && (
                 <div>
-                  <p>Nghĩa vụ quân sự</p>
                   <table>
+                    <tr>
+                      <td colSpan={2} className="header">
+                        <p className="font-bold text-center mb-1">
+                          Nghĩa vụ quân sự
+                        </p>
+                      </td>
+                    </tr>
                     <tr>
                       <td>Phân loại quân sự</td>
                       <td>Chiệu - 00</td>
@@ -323,8 +352,6 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
                       <td>Nơi đầu quân</td>
                       <td>Chệu</td>
                     </tr>
-                  </table>
-                  <table>
                     <tr>
                       <td>Đơn vị quân sự</td>
                       <td>Chệu</td>
@@ -339,9 +366,13 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
                       <td>Mã nghĩa vụ</td>
                       <td>Chệu</td>
                     </tr>
-                  </table>
-                  <p>Sức khỏe cá nhân</p>
-                  <table>
+                    <tr>
+                      <td colSpan={2} className="header">
+                        <p className="font-bold text-center mb-1">
+                          Sức khỏe cá nhân
+                        </p>
+                      </td>
+                    </tr>
                     <tr>
                       <td>Chiều cao</td>
                       <td>192 cm</td>
@@ -354,8 +385,6 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
                       <td>Nhóm máu</td>
                       <td>X</td>
                     </tr>
-                  </table>
-                  <table>
                     <tr>
                       <td>Thị lực trái</td>
                       <td>10/10</td>
@@ -370,9 +399,13 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
                       <td>Mù màu</td>
                       <td>Màu Sancroxis</td>
                     </tr>
-                  </table>
-                  <p>Người giới thiệu</p>
-                  <table>
+                    <tr>
+                      <td colSpan={2} className="header">
+                        <p className="font-bold text-center mt-1 mb-1">
+                          Người giới thiệu
+                        </p>
+                      </td>
+                    </tr>
                     <tr>
                       <td>Tên</td>
                       <td>Ning la xing a xỉn</td>
@@ -381,8 +414,6 @@ export default function MobileProfilePage(props: IMobileHomeProps) {
                       <td>Nơi làm việc</td>
                       <td>Văn phòng chủ tịch nước</td>
                     </tr>
-                  </table>
-                  <table>
                     <tr>
                       <td>Mối quan hệ</td>
                       <td>Đệ của mị</td>
