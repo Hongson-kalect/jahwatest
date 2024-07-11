@@ -1,40 +1,21 @@
+import { Col, Row, Select } from "antd";
 import * as React from "react";
-import styled from "styled-components";
+import { RiNotification3Fill } from "react-icons/ri";
 import jahwaLogo from "src/assets/image/icon3.png";
-import { RiLogoutBoxRFill, RiNotification3Fill } from "react-icons/ri";
 import HeaderOption from "src/components/items/header.options";
-import { Avatar, Col, Image, Row, Select, Tooltip } from "antd";
+import styled from "styled-components";
 
 import { DefaultOptionType } from "antd/es/select";
-import vnFlag from "src/assets/image/vn-flag.jfif";
-import krFlag from "src/assets/image/kr-flag.png";
-import cnFlag from "src/assets/image/cn-flag.png";
-import enFlag from "src/assets/image/en-flag.png";
-import { MdOutlineNotificationsActive } from "react-icons/md";
-import { HeaderSearch } from "src/components/search/header.search";
-import { FaSignOutAlt } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import { FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import cnFlag from "src/assets/image/cnFlag.png";
+import enFlag from "src/assets/image/enFlag.png";
+import krFlag from "src/assets/image/krFlag.png";
+import vnFlag from "src/assets/image/vnFlag.jfif";
+import { HeaderSearch } from "src/components/search/header.search";
 
 export interface IHomeHeaderProps {}
-
-const tinvit = [
-  {
-    title: "abc def",
-  },
-  {
-    title: "abc def",
-  },
-  {
-    title: "abc def",
-  },
-  {
-    title: "abc def",
-  },
-  {
-    title: "abc def",
-  },
-];
 
 const Wrapper = styled(Row)`
   height: 42px;
@@ -113,7 +94,6 @@ const languages: DefaultOptionType[] = [
 
 export default function HomeHeader(props: IHomeHeaderProps) {
   const navigate = useNavigate();
-  const [showOption, setShowOption] = React.useState(false);
   const { i18n } = useTranslation();
   const [language, setLanguage] = React.useState(() => {
     return localStorage.getItem("language") || "vi";

@@ -17,10 +17,10 @@ import {
 } from "react-icons/md";
 import { SiGooglemaps } from "react-icons/si";
 
-import vnFlag from "src/assets/image/vn-flag.jfif";
-import krFlag from "src/assets/image/kr-flag.png";
-import cnFlag from "src/assets/image/cn-flag.png";
-import enFlag from "src/assets/image/en-flag.png";
+import vnFlag from "src/assets/image/vnFlag.jfif";
+import krFlag from "src/assets/image/krFlag.png";
+import cnFlag from "src/assets/image/cnFlag.png";
+import enFlag from "src/assets/image/enFlag.png";
 
 export const menuLList = [
   {

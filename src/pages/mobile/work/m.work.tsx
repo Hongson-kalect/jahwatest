@@ -144,10 +144,7 @@ export default function MobileWork(props: IMobileHomeProps) {
               <Row className="shadow-inner shadow-blue-800 ml-1 rounded-lg bg-white">
                 <Col span={12} className="px-2 py-1">
                   <div className="text-sm text-transparent bg-gradient-to-r from-black to-purple-500 bg-clip-text font-bold">
-                    {t("work.day")}:{" "}
-                    <span className="text-gray-700 font-thin text-sm">
-                      14.5 Ngày
-                    </span>
+                    {t("work.day")}
                   </div>
                   <div className="text-gray-700 pl-3 text-sm">14.5 Ngày</div>
                 </Col>
@@ -283,7 +280,7 @@ export default function MobileWork(props: IMobileHomeProps) {
                         style={{ fontSize: "10px" }}
                         className="mb-1 text-pink-500"
                       >
-                        {t("work.comelate")}
+                        {t("work.comeLate")}
                       </p>
                     </div>
                     <div className="text-center flex flex-col items-center justify-center w-1/4 px-2">

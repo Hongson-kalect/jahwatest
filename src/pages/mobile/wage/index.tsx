@@ -7,11 +7,12 @@ import { minus, payFor } from "./utils";
 import { Header } from "../_components/header";
 import { Content } from "../_components/content";
 import HeaderPanel from "../_components/headerPanel";
+import Statistic from "../_components/statistic";
 
 export interface IMobileWageProps {}
 
 export default function MobileWage() {
-  const { t, i18 } = useTranslation();
+  const { t } = useTranslation();
 
   const [totalPay] = React.useState(
     payFor.reduce((a, b) => {
@@ -82,7 +83,26 @@ export default function MobileWage() {
                 {payFor.map((pay, index) => {
                   return (
                     <Col key={index} span={12} className="px-2 py-1">
-                      <div className="text-sm text-transparent bg-gradient-to-r from-black to-purple-500 bg-clip-text font-bold">
+                      <Statistic
+                        type="primary"
+                        title={
+                          pay.payFor[0].toUpperCase() +
+                          pay.payFor.slice(1).toLowerCase()
+                        }
+                        content={
+                          <>
+                            {numberToCurrency(pay.amount)}
+                            <span className="text-xs text-green-600 italic">
+                              {" "}
+                              {(pay.hour !== 0 || pay.munite !== 0) &&
+                                `(${pay.hour ? pay.hour + "h" : ""}${
+                                  pay.munite ? " " + pay.munite + "m" : ""
+                                })`}
+                            </span>
+                          </>
+                        }
+                      />
+                      {/* <div className="text-sm text-transparent bg-gradient-to-r from-black to-purple-500 bg-clip-text font-bold">
                         {pay.payFor[0].toUpperCase() +
                           pay.payFor.slice(1).toLowerCase()}
                       </div>
@@ -94,7 +114,7 @@ export default function MobileWage() {
                               pay.munite ? " " + pay.munite + "m" : ""
                             })`}
                         </span>
-                      </div>
+                      </div> */}
                     </Col>
                   );
                 })}
@@ -116,19 +136,14 @@ export default function MobileWage() {
                 {minus.map((minusItem, index) => {
                   return (
                     <Col key={index} span={12} className="px-2 py-1">
-                      <div className="text-sm text-transparent bg-gradient-to-r from-purple-800 to-red-800 bg-clip-text font-bold">
-                        {minusItem.payFor[0].toUpperCase() +
-                          minusItem.payFor.slice(1).toLowerCase()}
-                      </div>
-                      <div className="text-gray-700 px-3 text-sm">
-                        {numberToCurrency(minusItem.amount)}{" "}
-                        {/* <span className="text-xs text-green-600 italic">
-                          {(minusItem.hour !== 0 || minusItem.munite !== 0) &&
-                            `(${minusItem.hour ? minusItem.hour + "h" : ""}${
-                              minusItem.munite ? " " + minusItem.munite + "m" : ""
-                            })`}
-                        </span> */}
-                      </div>
+                      <Statistic
+                        type="error"
+                        title={
+                          minusItem.payFor[0].toUpperCase() +
+                          minusItem.payFor.slice(1).toLowerCase()
+                        }
+                        content={<>{numberToCurrency(minusItem.amount)}</>}
+                      />
                     </Col>
                   );
                 })}

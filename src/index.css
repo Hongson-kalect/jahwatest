@@ -5,6 +5,12 @@
 * {
   /* font-family: "Roboto"; */
   box-sizing: border-box;
+  /* will-change: filter; */
+  backface-visibility: hidden;
+}
+
+html {
+  font-size: 16px;
 }
 
 .hidden-scroll {
@@ -32,7 +38,6 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
-
 @keyframes rotate-r-90 {
   from {
     transform: rotate(0deg);
