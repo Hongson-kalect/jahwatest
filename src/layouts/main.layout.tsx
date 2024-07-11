@@ -1,12 +1,11 @@
 import { Col, FloatButton, Row } from "antd";
-import { calc } from "antd/es/theme/internal";
 import * as React from "react";
 import { FaBars } from "react-icons/fa6";
 import { ColFull } from "src/components/grid/row-col";
 import HomeHeader from "src/elements/home.header";
-import HomeSideBar from "src/elements/home.sidebar";
 import { useAppStore } from "src/store/app";
 import styled from "styled-components";
+import HomeSideBar from "./components/home.sidebar";
 
 export interface IMainLayoutProps {
   children: React.ReactNode;

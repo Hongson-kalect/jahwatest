@@ -1,54 +1,17 @@
-import { Button, Col, DatePicker, Row, Select } from "antd";
+import { Button, Col, DatePicker, Row } from "antd";
 import * as React from "react";
 import Calendar from "react-calendar";
 import { FaCalendar } from "react-icons/fa6";
 import { MdOutlineContentPasteSearch } from "react-icons/md";
 import useCustomNaviage from "src/hooks/useCustomNavigate";
 import styled from "styled-components";
+import { UnderLineSelect } from "../_components/select";
+import { Wrapper } from "../_components/wrapper";
+import { Header } from "../_components/header";
+import { t } from "i18next";
+import { Content } from "../_components/content";
 
 export interface IMobileHomeProps {}
-
-const Wrapper = styled.div`
-  /* display: flex; */
-  /* flex-direction: column; */
-  width: 100vw;
-  height: 100dvh;
-  /* padding: 4px; */
-`;
-const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  height: 200px;
-  background: radial-gradient(
-    circle at 100% 20%,
-    #859bbf 0%,
-    #7e9fdd 30%,
-    #7478db 60%,
-    #6e50dc 100%
-  );
-  border-radius: 8px;
-
-  .radio {
-    div {
-      text-align: center;
-      padding: 2px 8px 0;
-      color: white;
-      font-size: 18px;
-      border-top-right-radius: 12px;
-      border-top-left-radius: 12px;
-      transition: all 0.3s linear;
-      width: 120px;
-    }
-
-    .active {
-      font-weight: bold;
-      background-color: white;
-      color: #6a6af1;
-    }
-  }
-`;
 
 const DayDetailTable = styled.table`
   margin-top: 4px;
@@ -62,31 +25,6 @@ const DayDetailTable = styled.table`
     }
   }
 `;
-
-const Tab = styled.div`
-  /* flex: 1; */
-  min-height: calc(100dvh - 200px);
-  /* overflow: auto; */
-  padding: 12px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 1) 0%,
-    #eaeaea 70%,
-    #c6c6c6 100%
-  );
-`;
-
-const UnderLineSelect = styled(Select)`
-  & .ant-select-selector {
-    border: none !important;
-    box-shadow: none !important;
-    outline: none;
-    border-bottom: 1px solid gray !important ;
-    border-radius: 0 !important;
-  }
-  /* outline: none !important; */
-`;
-
 const StyledCalendar = styled(Calendar)`
   margin-top: 8px;
   border-radius: 2px;
@@ -141,17 +79,11 @@ export default function MobileWork(props: IMobileHomeProps) {
     date && setCalendarValue(date);
   };
 
-  const handleChangeMonth = () => {
-    setCalendarValue(
-      new Date(calendarValue.setMonth(calendarValue.getMonth() + 2))
-    );
-  };
-
   return (
     <Wrapper>
       <Header className="header">
         <div className="header-options flex justify-between px-4 py-2 relative z-10">
-          <div className="title text-white text-2xl">THÀNH TÍCH</div>
+          <div className="title text-white text-2xl">{t("work.title")}</div>
           <div className="options flex gap-2 items-center">
             <DatePicker
               size="large"
@@ -176,13 +108,17 @@ export default function MobileWork(props: IMobileHomeProps) {
             <Row className="w-full">
               <Col span={12}>
                 <div className="">
-                  <p className="text-blue-600 text-lg font-bold">Bậc lương</p>
+                  <p className="text-blue-600 text-lg font-bold">
+                    {t("work.salaryRank")}
+                  </p>
                   <p className="text-blue-600 text-base">P6 - Q1</p>
                 </div>
               </Col>
               <Col span={12}>
                 <div className="">
-                  <p className="text-red-400 text-lg font-bold">Chức vụ:</p>
+                  <p className="text-red-400 text-lg font-bold">
+                    {t("work.position")}:
+                  </p>
                   <p className="text-red-400 text-base">Nhân viên</p>
                 </div>
               </Col>
@@ -190,7 +126,9 @@ export default function MobileWork(props: IMobileHomeProps) {
             <Row className="w-full mt-1">
               <Col span={24}>
                 <div className="">
-                  <p className="text-green-600 text-xl font-bold">Vị trí:</p>
+                  <p className="text-green-600 text-xl font-bold">
+                    {t("work.location")}:
+                  </p>
                   <p className="text-green-600 text-lg"> PLC Xưởng Message</p>
                 </div>
               </Col>
@@ -198,15 +136,15 @@ export default function MobileWork(props: IMobileHomeProps) {
           </div>
         </div>
       </Header>
-      <Tab className="tab">
+      <Content className="tab">
         <Col span={24}>
           <Row className="w-full">
             <Col span={24}>
-              <p className="italic text-blue-600">Chi tiết thành tích:</p>
+              <p className="italic text-blue-600">{t("work.detail")}:</p>
               <Row className="shadow-inner shadow-blue-800 ml-1 rounded-lg bg-white">
                 <Col span={12} className="px-2 py-1">
                   <div className="text-sm text-transparent bg-gradient-to-r from-black to-purple-500 bg-clip-text font-bold">
-                    Làm ngày:{" "}
+                    {t("work.day")}:{" "}
                     <span className="text-gray-700 font-thin text-sm">
                       14.5 Ngày
                     </span>
@@ -215,7 +153,7 @@ export default function MobileWork(props: IMobileHomeProps) {
                 </Col>
                 <Col span={12} className="px-2 py-1">
                   <div className="text-sm text-transparent bg-gradient-to-r from-black to-purple-500 bg-clip-text font-bold">
-                    T/C Ngày
+                    {t("work.dayOT")}
                   </div>
                   <div className="text-gray-700 pl-3 text-sm">
                     22 giờ 30 phút
@@ -223,45 +161,43 @@ export default function MobileWork(props: IMobileHomeProps) {
                 </Col>
                 <Col span={12} className="px-2 py-1">
                   <div className="text-sm text-transparent bg-gradient-to-r from-black to-purple-500 bg-clip-text font-bold">
-                    Làm đêm
+                    {t("work.night")}
                   </div>
                   <div className="text-gray-700 pl-3 text-sm">14 Ngày</div>
                 </Col>
                 <Col span={12} className="px-2 py-1">
                   <div className="text-sm text-transparent bg-gradient-to-r from-black to-purple-500 bg-clip-text font-bold">
-                    T/C Đêm
+                    {t("work.nightOT")}
                   </div>
                   <div className="text-gray-700 pl-3 text-sm">8 Giờ</div>
                 </Col>
                 <Col span={12} className="px-2 py-1">
                   <div className="text-sm text-transparent bg-gradient-to-r from-black to-purple-500 bg-clip-text font-bold">
-                    Làm chủ nhật
+                    {t("work.sunday")}
                   </div>
                   <div className="text-gray-700 pl-3 text-sm">2 Ngày</div>
                 </Col>
                 <Col span={12} className="px-2 py-1 opacity-30">
                   <div className="text-sm text-transparent bg-gradient-to-r from-black to-purple-500 bg-clip-text font-bold">
-                    T/C Chủ nhật
+                    {t("work.sundayOT")}
                   </div>
                   <div className="text-gray-700 pl-3 text-sm">0</div>
                 </Col>
                 <Col span={12} className="px-2 py-1 opacity-30">
                   <div className="text-sm text-transparent bg-gradient-to-r from-black to-purple-500 bg-clip-text font-bold">
-                    Làm ngày lễ{" "}
+                    {t("work.fes")}
                   </div>
                   <div className="text-gray-700 pl-3 text-sm">0</div>
                 </Col>
                 <Col span={12} className="px-2 py-1 opacity-30">
                   <div className="text-sm text-transparent bg-gradient-to-r from-black to-purple-500 bg-clip-text font-bold">
-                    Tăng ca ngày lễ
+                    {t("work.fesOT")}
                   </div>
                   <div className="text-gray-700 pl-3 text-sm">0</div>
                 </Col>
               </Row>
 
-              <p className="italic text-red-600 mt-2">
-                Lịch làm việc chi tiết:
-              </p>
+              <p className="italic text-red-600 mt-2">{t("work.calendar")}</p>
 
               <Row className="shadow-inner shadow-blue-800 ml-1 rounded-lg bg-white">
                 <div className="flex w-full justify-between items-center text-indigo-600 gap-2 my-2 mr-2">
@@ -269,7 +205,7 @@ export default function MobileWork(props: IMobileHomeProps) {
                     style={{ fontSize: "12px" }}
                     className="mb-1 px-2 text-gray-400 text-center italic"
                   >
-                    Chú thích
+                    {t("work.note")}
                   </p>
                   <div className="flex flex-1 justify-end gap-2">
                     <UnderLineSelect
@@ -283,7 +219,7 @@ export default function MobileWork(props: IMobileHomeProps) {
                       type="primary"
                       icon={<MdOutlineContentPasteSearch />}
                     >
-                      Tra cứu
+                      {t("work.search")}
                     </Button>
                   </div>
                 </div>
@@ -295,7 +231,7 @@ export default function MobileWork(props: IMobileHomeProps) {
                         style={{ fontSize: "10px" }}
                         className="mb-1 text-green-400"
                       >
-                        Thường
+                        {t("work.normal")}
                       </p>
                     </div>
 
@@ -306,7 +242,7 @@ export default function MobileWork(props: IMobileHomeProps) {
                         style={{ fontSize: "10px" }}
                         className="mb-1 text-cyan-600"
                       >
-                        Tăng ca
+                        {t("work.overtime")}
                       </p>
                     </div>
                     <div className="text-center flex flex-col items-center justify-center w-1/4 px-2">
@@ -316,7 +252,7 @@ export default function MobileWork(props: IMobileHomeProps) {
                         style={{ fontSize: "10px" }}
                         className="mb-1 text-red-600"
                       >
-                        Nghỉ KP
+                        {t("work.offNoP")}
                       </p>
                     </div>
                     <div className="text-center flex flex-col items-center justify-center w-1/4 px-2">
@@ -326,7 +262,7 @@ export default function MobileWork(props: IMobileHomeProps) {
                         style={{ fontSize: "10px" }}
                         className="mb-1 text-orange-500"
                       >
-                        Nghỉ P
+                        {t("work.offP")}
                       </p>
                     </div>
 
@@ -337,7 +273,7 @@ export default function MobileWork(props: IMobileHomeProps) {
                         style={{ fontSize: "10px" }}
                         className="mb-1 text-yellow-500"
                       >
-                        Nghỉ 1/2
+                        {t("work.offhalf")}
                       </p>
                     </div>
 
@@ -347,7 +283,7 @@ export default function MobileWork(props: IMobileHomeProps) {
                         style={{ fontSize: "10px" }}
                         className="mb-1 text-pink-500"
                       >
-                        Đi muộn
+                        {t("work.comelate")}
                       </p>
                     </div>
                     <div className="text-center flex flex-col items-center justify-center w-1/4 px-2">
@@ -357,14 +293,14 @@ export default function MobileWork(props: IMobileHomeProps) {
                         style={{ fontSize: "10px" }}
                         className="mb-1 text-purple-500"
                       >
-                        Về sớm
+                        {t("work.leaveSoon")}
                       </p>
                     </div>
                     <div className="text-center flex flex-col items-center justify-center w-1/4 px-2">
                       {" "}
                       <div className="shadow shadow-black h-1 bg-transparent w-6"></div>
                       <p style={{ fontSize: "10px" }} className="text-xs">
-                        Ca đêm
+                        {t("work.nightShift")}
                       </p>
                     </div>
                   </div>
@@ -439,18 +375,18 @@ export default function MobileWork(props: IMobileHomeProps) {
                 <div className="px-2 py-1 flex-1 mt-2">
                   <div className="border px-2 py-1">
                     <p className="underline text-gray-500 text-xs">
-                      Chi tiết ngày:
+                      {t("work.dayDetail")}:
                     </p>
 
                     <div className="px-1">
                       <DayDetailTable>
                         <tbody>
                           <tr>
-                            <td>Chấm công:</td>
+                            <td>{t("work.start")}:</td>
                             <td>8:14:16</td>
                           </tr>
                           <tr>
-                            <td>Tan làm:</td>
+                            <td>{t("work.finish")}:</td>
                             <td>17:51:14</td>
                           </tr>
                           <tr>
@@ -478,7 +414,7 @@ export default function MobileWork(props: IMobileHomeProps) {
             </Col>
           </Row>
         </Col>
-      </Tab>
+      </Content>
     </Wrapper>
   );
 }
@@ -515,29 +451,29 @@ const TabContent = styled.div`
   }
 `;
 
-type ItemProps = {
-  background?: string;
-  display?: React.ReactNode;
-  link: string;
-  title?: string;
-};
+// type ItemProps = {
+//   background?: string;
+//   display?: React.ReactNode;
+//   link: string;
+//   title?: string;
+// };
 
-function TabMenu(props: ItemProps) {
-  const navigate = useCustomNaviage();
+// function TabMenu(props: ItemProps) {
+//   const navigate = useCustomNaviage();
 
-  const handleNavigate = () => {
-    navigate(props.link);
-  };
-  return (
-    <TabCol xs={12} md={8} lg={6} xxl={4}>
-      <TabContent onClick={handleNavigate}>
-        <div className="display" style={{ fontSize: "36px" }}>
-          {props.display}
-        </div>
-        <p className="p-1 text-center text-lg font-semibold text-gray-700 line-clamp-1">
-          {props.title}
-        </p>
-      </TabContent>
-    </TabCol>
-  );
-}
+//   const handleNavigate = () => {
+//     navigate(props.link);
+//   };
+//   return (
+//     <TabCol xs={12} md={8} lg={6} xxl={4}>
+//       <TabContent onClick={handleNavigate}>
+//         <div className="display" style={{ fontSize: "36px" }}>
+//           {props.display}
+//         </div>
+//         <p className="p-1 text-center text-lg font-semibold text-gray-700 line-clamp-1">
+//           {props.title}
+//         </p>
+//       </TabContent>
+//     </TabCol>
+//   );
+// }

@@ -175,7 +175,6 @@ export const UnderLineSelect = styled(Select)`
     border-bottom: 1px solid gray !important ;
     border-radius: 0 !important;
   }
-  /* outline: none !important; */
 `;
 
 const DayOffTable = styled(Table)`

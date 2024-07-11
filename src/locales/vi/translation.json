@@ -1,14 +1,24 @@
 {
-  "common": {},
+  "common": {
+    "personal": "Cá nhân",
+    "work": "Công việc"
+  },
   "header": {},
-  "sideBar": {
+  "sidebar": {
     "home": "Trang chủ",
     "wage": "Bảng lương",
-    "business": "Công việc",
-    "dayOff": "Thông tin nghỉ",
-    "profile": "Thông tin cá nhân",
+    "dayOff": "Ngày nghỉ",
+    "progress": "Tiến độ",
+    "notification": "Thông báo",
+    "seft": "Bản thân",
     "mail": "Thư từ",
-    "setting": "Cài đặt"
+    "approval": "Phê duyệt",
+    "plan": "Kế hoạch",
+    "humanMNG": "QL Nhân lực",
+    "suplierMNG": "QL Cung ứng",
+    "distributionMNG": "QL Phân phối",
+    "report": "Báo cáo",
+    "jahwaVN": "Jahwa VN"
   },
 
   "loginPage": {
@@ -37,8 +47,67 @@
     "mailTitle": "Thư từ",
     "mailDecribe": "Kiểm tra hệ email công việc của bạn",
     "contactTitle": "Gọi cho DEV",
-    "contactDecribe": "Nhắn tin với cu Hùng IT :V"
+    "contactDecribe": "Nhắn tin với cu Hùng IT :V",
+    "title": "JAHWA Lương"
   },
+
+  "dayOff": {
+    "title": "Ngày nghỉ",
+    "lastYear": "Năm ngoái",
+    "thisYear": "Năm nay",
+    "used": "Đã dùng",
+    "left": "Còn lại",
+    "history": "Lịch sử nghỉ",
+    "date": "Ngày",
+    "type": "Loại",
+    "reason": "Lý do"
+  },
+
+  "work": {
+    "salaryRank": "Bậc lương",
+    "position": "Chức vụ",
+    "location": "Vị trí",
+    "title": "Thành tích",
+    "detail": "Chi tiết thành tích",
+    "day": "Làm ngày",
+    "dayOT": "Tăng ca ngày",
+    "night": "Làm đêm",
+    "nightOT": "Tăng ca đêm",
+    "sunday": "Chủ nhật",
+    "sundayOT": "Tăng ca CN",
+    "fes": "Ngày lễ",
+    "fesOT": "Tăng ca lễ",
+    "calendar": "Lịch chi tiết",
+    "note": "Ghi chú",
+    "search": "Tra cứu",
+    "normal": "Bình thường",
+    "overtime": "Tăng ca",
+    "offNoP": "Nghỉ ko phép",
+    "offP": "Nghỉ phép",
+    "offhalf": "Nghỉ nửa",
+    "comeLate": "Đi muộn",
+    "leaveSoon": "Về sớm",
+    "nightShift": "Ca đêm",
+    "dayDetail": "Chi tiết ngày",
+    "start": "Bắt đầu",
+    "finish": "Kết thúc",
+    "otTime": "Tăng ca",
+    "shift": "Ca làm"
+  },
+
+  "selfNotify": {
+    "title": "Thông báo",
+    "socialNews": "Tin xã hội",
+    "companyNews": "Tin nội bộ",
+    "temporaryNews": "Tin tức thời",
+    "pictureNews": "Nội dung Ảnh",
+    "all": "Tất cả",
+    "social": "Xã hội",
+    "company": "Nội bộ",
+    "temporary": "Tạm thời",
+    "picture": "Mục ảnh"
+  },
+
   "profile": {
     "seft": {
       "name": "Tên",
@@ -148,7 +217,7 @@
     }
   },
   "wage": {
-    "title": "Chi tiết phiếu lương",
+    "title": "Phiếu lương",
     "code": "Mã số",
     "name": "Họ tên",
     "department": "Bộ phận",
@@ -164,14 +233,14 @@
     "amount": "Số tiền",
     "hour": "Giờ",
     "munite": "Phút",
-    "totalPay": "Tổng chi trẳ",
+    "totalPay": "Tổng chi trả",
     "deductDetail": "Chi tiết khấu trừ",
     "deductSection": "Hạng mục khấu trừ",
     "deducamount": "Số tiền",
     "totalDeduct": "Tổng khấu trừ",
-    "totalPayment": "Tổng tiền chi trả",
-    "totalDeduction": "Tổng tiền khấu trừ",
-    "total": "Tiền chi trả thực tế",
+    "totalPayment": "Tổng chi trả",
+    "totalDeduction": "Tổng khấu trừ",
+    "total": "Chi trả thực tế",
     "dayOffStatus": "Hiện trạng phép năm",
     "lastYear": "Năm ngoái",
     "thisYear": "Năm nay",

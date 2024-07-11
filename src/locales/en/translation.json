@@ -1,25 +1,37 @@
 {
-  "common": {},
-  "header": {},
-  "sideBar": {
-    "home": "Home",
-    "wage": "Wage",
-    "business": "Work",
-    "dayOff": "Day off",
-    "profile": "Profile",
-    "mail": "Mail",
-    "setting": "Setting"
+  "common": {
+    "personal": "Personal",
+    "work": "Work"
   },
+  "header": {},
+  "sidebar": {
+    "home": "Home",
+    "wage": "Wage Status",
+    "dayOff": "Day Off Info",
+    "progress": "Progress",
+    "notification": "Notification",
+    "seft": "Self",
+    "mail": "Mail",
+    "approval": "Approval",
+    "plan": "Plan Management",
+    "humanMNG": "Human Resource Management",
+    "suplierMNG": "Supplier Management",
+    "distributionMNG": "Distribution Management",
+    "report": "Report",
+    "jahwaVN": "Jahwa VN"
+  },
+
   "loginPage": {
     "welcome": "Welcome",
     "username": "Username",
     "password": "Password",
-    "saveAccount": "Save account",
-    "forgotAccount": "Forgot password",
+    "saveAccount": "Save Account",
+    "forgotAccount": "Forgot Password",
     "login": "Login",
-    "newMember": "New member?",
-    "createPassword": "Create password!"
+    "newMember": "New Member?",
+    "createPassword": "Create Password!"
   },
+
   "homePage": {
     "slogan-1": "CHANGE! INCREASE SALARY! TOGETHER!",
     "slogan-2": "ACHIEVE GOAL THROUGH PRODUCTIVITY AND QUALITY IMPROVEMENT",
@@ -37,6 +49,64 @@
     "contactTitle": "Contact DEV",
     "contactDecribe": "Send a message to cu Hùng IT :V"
   },
+
+  "dayOff": {
+    "title": "Day Off",
+    "lastYear": "Last Year",
+    "thisYear": "This Year",
+    "used": "Used",
+    "left": "Remaining",
+    "history": "Leave History",
+    "date": "Date",
+    "type": "Type",
+    "reason": "Reason"
+  },
+
+  "work": {
+    "salaryRank": "Salary rank",
+    "position": "Position",
+    "location": "Location",
+    "title": "Achievement",
+    "detail": "Achievement detail",
+    "day": "Work day",
+    "dayOT": "Day overtime",
+    "night": "Night work",
+    "nightOT": "Night overtime",
+    "sunday": "Sunday",
+    "sundayOT": "Sunday overtime",
+    "fes": "Holiday",
+    "fesOT": "Holiday overtime",
+    "calendar": "Detailed calendar",
+    "note": "Note",
+    "search": "Search",
+    "normal": "Normal",
+    "overtime": "Overtime",
+    "offNoP": "Off (no permission)",
+    "offP": "Off (permission)",
+    "offhalf": "Off (half day)",
+    "comeLate": "Late",
+    "leaveSoon": "Leave early",
+    "nightShift": "Night shift",
+    "dayDetail": "Day detail",
+    "start": "Start",
+    "finish": "Finish",
+    "otTime": "Overtime",
+    "shift": "Shift"
+  },
+
+  "selfNotify": {
+    "title": "Notification",
+    "socialNews": "Social news",
+    "companyNews": "Company news",
+    "temporaryNews": "Temporary news",
+    "pictureNews": "Picture content",
+    "all": "All",
+    "social": "Social",
+    "company": "Company",
+    "temporary": "Temporary",
+    "picture": "Picture"
+  },
+
   "profile": {
     "seft": {
       "name": "Name",

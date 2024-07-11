@@ -20,12 +20,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import { CgUserlane } from "react-icons/cg";
 import { useTranslation } from "react-i18next";
-import { DefaultOptionType } from "antd/es/select";
-
-import vnFlag from "src/assets/image/vn-flag.jfif";
-import krFlag from "src/assets/image/kr-flag.png";
-import cnFlag from "src/assets/image/cn-flag.png";
-import enFlag from "src/assets/image/en-flag.png";
 
 export interface IHomeSideBarProps {}
 
@@ -48,85 +42,18 @@ const Wrapper = styled(Row)`
     5px 5px 5px rgba(0, 0, 0, 0.1) inset;
 `;
 
-const languages: DefaultOptionType[] = [
-  {
-    value: "vi",
-    label: (
-      <div className="flex gap-1 items-center justify-between">
-        <div
-          className="h-4 w-6"
-          style={{
-            background: `url(${vnFlag}) center center /contain no-repeat`,
-          }}
-        ></div>
-        <p className="font-semibold" style={{ fontSize: "12px" }}>
-          VN
-        </p>
-      </div>
-    ),
-  },
-  {
-    value: "kr",
-    label: (
-      <div className="flex gap-1 items-center justify-between">
-        <div
-          className="h-4 w-6"
-          style={{
-            background: `url(${krFlag}) center center /contain no-repeat`,
-          }}
-        ></div>
-        <p className="font-semibold" style={{ fontSize: "12px" }}>
-          KR
-        </p>
-      </div>
-    ),
-  },
-  {
-    value: "cn",
-    label: (
-      <div className="flex gap-1 items-center justify-between">
-        <div
-          className="h-4 w-6"
-          style={{
-            background: `url(${cnFlag}) center center /contain no-repeat`,
-          }}
-        ></div>
-        <p className="font-semibold" style={{ fontSize: "12px" }}>
-          CN
-        </p>
-      </div>
-    ),
-  },
-  {
-    value: "en",
-    label: (
-      <div className="flex gap-1 items-center justify-between">
-        <div
-          className="h-4 w-6"
-          style={{
-            background: `url(${enFlag}) center center /contain no-repeat`,
-          }}
-        ></div>
-        <p className="font-semibold" style={{ fontSize: "12px" }}>
-          EN
-        </p>
-      </div>
-    ),
-  },
-];
-
 export default function HomeSideBar() {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
-  const [language, setLanguage] = React.useState(() => {
-    return localStorage.getItem("language") || "vi";
-  });
+  //   const [language, setLanguage] = React.useState(() => {
+  //     return localStorage.getItem("language") || "vi";
+  //   });
 
-  React.useEffect(() => {
-    localStorage.setItem("language", language || "vi");
-    i18n.changeLanguage(language || "vi");
-  }, [language]);
+  //   React.useEffect(() => {
+  //     localStorage.setItem("language", language || "vi");
+  //     i18n.changeLanguage(language || "vi");
+  //   }, [language]);
 
   return (
     <Wrapper>
@@ -303,145 +230,7 @@ export default function HomeSideBar() {
           icon={<IoNewspaperOutline size={22} />}
           activeIcon={<IoNewspaperSharp size={22} />}
         />
-        {/* <MenuItem
-          title={t("sideBar.business")}
-          link="/business"
-          icon={<IoNewspaperOutline size={22} />}
-          activeIcon={<IoNewspaperSharp size={22} />}
-        /> */}
-
-        {/* <MenuItem
-          title={t("sideBar.mail")}
-          link="/mail"
-          icon={<CiMail size={22} />}
-          activeIcon={<IoMdMail size={22} />}
-        />
-        <MenuItem
-          title={t("sideBar.setting")}
-          link="/notification"
-          icon={<IoSettingsOutline size={22} />}
-          activeIcon={<IoSettingsSharp size={22} />}
-        /> */}
       </Col>
     </Wrapper>
   );
-
-  // return (
-  //   <Wrapper
-  //     onMouseEnter={() => setIsHover(true)}
-  //     onMouseLeave={() => setIsHover(false)}
-  //   >
-  // <div className="h-32 flex flex-col justify-center items-center mb-4">
-  //   <div
-  //     className="w-full flex-1"
-  //     style={{
-  //       background: `url(${summerLogo}) center center / cover no-repeat`,
-  //     }}
-  //   ></div>
-  //   {/* <p className="font-bold text-xl text-green-600 italic mb-2 w-full text-center">
-  //     JAHWA Nương
-  //   </p> */}
-  // </div>
-  //     <div
-  //       className="flex-1 overflow-auto hidden-scroll"
-  //       // style={{ maxHeight: "calc(100vh - 180px)" }}
-  //     >
-  // <HomeSidebarItem
-  //   title="Home"
-  //   link="/home/main"
-  //   iconL={<IoHomeOutline className="icon"/>}
-  //   activeIconL={<AiFillHome className="icon"/>}
-  //   childs={[
-  //     {
-  //       title: "Home1",
-  //       iconL: <AiOutlineMail className="icon"/>,
-  //       link: "/home/home1",
-  //     },
-  //     {
-  //       title: "Home2",
-  //       iconL: <AiOutlineMail className="icon"/>,
-  //       link: "/home/home2",
-  //     },
-  //   ]}
-  // />
-  // <HomeSidebarItem
-  //   title="Thông báo"
-  //   link="/notification/main"
-  //   iconL={<IoIosNotificationsOutline className="icon"/>}
-  //   activeIconL={<IoIosNotifications/>}
-  //   childs={[
-  //     {
-  //       title: "Notify1",
-  //       iconL: <AiOutlineMail className="icon"/>,
-  //       link: "/notification/notification1",
-  //     },
-  //     {
-  //       title: "Notify2",
-  //       iconL: <AiOutlineMail className="icon"/>,
-  //       link: "/notification/notification2",
-  //     },
-  //   ]}
-  // />
-  // <HomeSidebarItem
-  //   title="Bảng lương"
-  //   link="/wage/main"
-  //   iconL={<FaRegMoneyBillAlt className="icon"/>}
-  //   activeIconL={<FaMoneyBillAlt/>}
-  //   childs={[
-  //     {
-  //       title: "Lương năm",
-  //       iconL: <AiOutlineMail className="icon"/>,
-  //       link: "/wage/year",
-  //     },
-  //     // {
-  //     //   title: "",
-  //     //   iconL: <AiOutlineMail className="icon"/>,
-  //     //   link: "home1",
-  //     // },
-  //     // {
-  //     //   title: "Child",
-  //     //   iconL: <AiOutlineMail className="icon"/>,
-  //     //   link: "home2",
-  //     // },
-  //   ]}
-  // />
-  // <HomeSidebarItem
-  //   title="Công việc"
-  //   link="/job/main"
-  //   iconL={<LuUser2/>}
-  //   activeIconL={<FaUserLarge/>}
-  //   childs={[
-  //     {
-  //       title: "Thông tin nghỉ",
-  //       iconL: <AiOutlineMail className="icon"/>,
-  //       link: "/job/day-off",
-  //     },
-  //     {
-  //       title: "Thông tin chấm công",
-  //       iconL: <AiOutlineMail className="icon"/>,
-  //       link: "/job/time",
-  //     },
-  //   ]}
-  // />
-  // <HomeSidebarItem
-  //   title="Thông tin cá nhân"
-  //   link="/profile/main"
-  //   iconL={<LuUser2/>}
-  //   activeIconL={<FaUserLarge/>}
-  //   childs={[
-  //     {
-  //       title: "Profile1",
-  //       iconL: <AiOutlineMail className="icon"/>,
-  //       link: "/profile/profile1",
-  //     },
-  //     {
-  //       title: "Profile2",
-  //       iconL: <AiOutlineMail className="icon"/>,
-  //       link: "/profile/profile2",
-  //     },
-  //   ]}
-  // />
-  //     </div>
-  //   </Wrapper>
-  // );
 }
